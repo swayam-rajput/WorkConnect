@@ -68,9 +68,10 @@ def register(request):
     return render(request,'newco/register.html',{'form': form})
 
 def listings(request):
-    jobs = list(Job.objects.all())
+    jobs = Job.objects.all()
     jobs = reversed(jobs)
     return render(request,'newco/listings.html',{'jobs':jobs})
+
 def profile(request,username):
     if User.objects.filter(username=username):
         return render(request,'newco/profile.html',{'username':username})
@@ -78,6 +79,7 @@ def profile(request,username):
         return HttpResponse(f'Error: User {username} does not exist')
 
 def addjob(request:HttpRequest):
+    """Creates a new job based on the information provided via the form"""
     if request.method == 'POST':
         title = request.POST.get('job-title')
         description = request.POST.get('job_description')

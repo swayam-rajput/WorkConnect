@@ -36,6 +36,7 @@
 }
 .log-reg-btn:hover{
     scale:1.05;
+    color: white;
 }
 .signup-prompt{
     width: 100%;
