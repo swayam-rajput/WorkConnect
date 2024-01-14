@@ -7,7 +7,10 @@ urlpatterns = [
     path('logout',views.log_out,name='newco-logout'),
     path('register',views.register,name='newco-register'),
     path('home',views.homepage,name='newco-home'),
-    # path('profile',views.profile,name='profile'),
-    path('listings',views.listings,name='newco-listings')
-    # path('',views.homepage,name='newco')
+    path('addjob',views.addjob,name='newco-add-job'),
+    path('profile/<str:username>',views.profile,name='newco-profile'),
+    path('posts',views.posts,name='newco-posted'),
+    # path('posts/<str:id>',views.posts,name='newco-posted'),
+    path('listings',views.listings,name='newco-listings'),
+    path('delete/<int:job_id>',views.delete_job,name='newco-delete')
 ]

@@ -1,4 +1,8 @@
-
+function emailvaluate(){
+    var text = document.getElementById('username').value
+    document.getElementById('email').value = `${text}@gmail.com`
+    console.log('called')
+}
 function validateRegistration() {
     resetErrors();
     // alert('func called')
@@ -8,8 +12,8 @@ function validateRegistration() {
     var age = document.getElementById('age');
     var password = document.getElementById('password');
     var cpassword = document.getElementById('cpassword');
-
     var borderbottom = '2px red solid';
+
     if (!username.value.match(/^\w+$/)) {
         username.style.borderBottom = borderbottom;
 
@@ -51,4 +55,42 @@ function resetErrors() {
     errorElements.forEach(function (element) {
         element.style.borderBottom = 'initial';
     });
+}
+
+function validateJobForm() {
+    // Get form inputs
+    var title = document.getElementById('job-title').value.trim();
+    var description = document.getElementById('job-description').value.trim();
+    var jobType = document.getElementById('job-type').value.trim();
+    var salary = document.getElementById('salary').value.trim();
+    var location = document.getElementById('location').value.trim();
+    var borderbottom = '2px red solid';
+    // Validate each field
+    if (title === '') {
+        document.getElementById('job-title').style.borderBottom = borderbottom;
+        return false;
+    }
+
+    if (description === '') {
+        document.getElementById('job-description').style.borderBottom = borderbottom;
+        return false;
+    }
+
+    if (jobType === '') {
+        document.getElementById('job-type').style.borderBottom = borderbottom;
+        return false;
+    }
+
+    if (salary === '') {
+        document.getElementById('salary').style.borderBottom = borderbottom;
+        return false;
+    }
+
+    if (location === '') {
+        document.getElementById('location').style.borderBottom = borderbottom;
+        return false;
+    }
+
+    // If all fields are valid, return true to submit the form
+    return true;
 }

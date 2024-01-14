@@ -29,12 +29,12 @@
 .h-40px{
     height: 40px;
 }
-.form div button{
+.log-reg-btn{
     background-color: #0f9775;
     color: white;
     border-radius: 10px;
 }
-.form div button:hover{
+.log-reg-btn:hover{
     scale:1.05;
 }
 .signup-prompt{

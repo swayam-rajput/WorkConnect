@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse, HttpRequest, HttpResponseRedirect
 from django.db import IntegrityError
 from django.contrib.auth.forms import AuthenticationForm,UserCreationForm
@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 
-from .models import UserProfile
+from .models import UserProfile,Job
 
 # Create your views here.
 def log_in(request,user_name=None,psd=None):
@@ -58,17 +58,57 @@ def register(request):
                 messages.success(request, f'User {username} registered')
                 return redirect('newco-home')
             else:
-                messages.error(request, f'Enter valid information')
+                messages.error(request, f'Passwords do not match')
                 return redirect('newco-register')
         except IntegrityError as e:
             messages.error(request, f'User {username} already exists')
             # return redirect('newco-register')
-        except ValueError as e:
-            pass
     else:
         form = UserCreationForm()
     return render(request,'newco/register.html',{'form': form})
 
 def listings(request):
     return render(request,'newco/listings.html')
+def profile(request,username):
+    if User.objects.filter(username=username):
+        return render(request,'newco/profile.html',{'username':username})
+    else:
+        return HttpResponse(f'Error: User {username} does not exist')
 
+def addjob(request:HttpRequest):
+    if request.method == 'POST':
+        title = request.POST.get('job-title')
+        description = request.POST.get('job_description')
+        job_specification = request.POST.get('job-type')
+        salary = request.POST.get('salary')
+        location = request.POST.get('location')
+        if title == '':
+            messages.error(request,f'Enter valid information')
+        else:
+            user = request.user
+            job_post = Job.objects.create(
+                user=user,
+                title=title,
+                description=description,
+                job_specification=job_specification.upper(),
+                salary=salary,
+                location=location
+            )
+            messages.success(request,f'Posted Job')
+        return redirect('newco-posted')
+        return redirect('newco-add-job')
+        # redirect to the jobs posted page to view the posted job and display the message there
+    return render(request,'newco/addjob.html')
+
+def posts(request):
+    job = Job.objects.filter(user=request.user)
+    job = reversed(job)
+    return render(request,'newco/postedjobs.html',{'jobs':job})
+def delete_job(request:HttpRequest,job_id):
+    if request.method == 'GET':
+        job = Job.objects.filter(id=int(job_id))
+        job = get_object_or_404(Job,id=int(job_id))
+        job.delete()
+        messages.success(request,f'Deleted job successfully')
+        return redirect('newco-posted')
+    

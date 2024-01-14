@@ -1,4 +1,8 @@
 {% extends 'newco/layout.html' %}
+{% load static %}
+
+{% block css %}<link rel="stylesheet" href="{% static 'newco/log.reg.styles.css' %}">{% endblock %}
+    
 
 {% block title %}Register{% endblock %}
 {% block nav-header %}
@@ -12,11 +16,11 @@
         <p class="heading">Register</p>
         <div class="w-100 center bg-transparent" style="flex-direction: column;">
             <div class="mb-2 bg-transparent">
-                <input  id="username" name="username"  placeholder="Username" type="text">
+                <input  id="username" name="username" oninput="emailvaluate()" placeholder="Username" type="text">
             </div>
             
             <div class="mb-2 bg-transparent">
-                <input  id="email" name="email" placeholder="Email" value="@gmail.com" type="email">
+                <input  id="email" name="email" placeholder="Email" type="email">
             </div>
 
             <div class="mb-2 bg-transparent">
@@ -52,7 +56,7 @@
         
         <div class="center h-50 bg-transparent" style="gap: 20px;">
             <a href="{% url 'newco-home' %}"><button type="button" style="background-color: white; color: black;">Back</button></a>
-            <button>Sign Up</button>
+            <button class="log-reg-btn">Sign Up</button>
         </div>
         <div class="center signup-prompt">
             <a class="links" href="{% url 'newco-login' %}">Already have an account? Log In</a>

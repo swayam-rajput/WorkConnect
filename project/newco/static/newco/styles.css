@@ -1,22 +1,45 @@
-
-/* 
-    list of 
-*/
-
 *{
     /* color-scheme: dark; */
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     margin: 0;
     padding: 0;
-    color: rgb(255, 255, 255);
+    color: black;
     background-color: #f5f5f5;
+}
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: #333;
+}
+::-webkit-scrollbar-thumb{
+    color: #4a7279;
+}
+::-webkit-scrollbar-track{
+    color: red;
+
+}
+::-webkit-scrollbar-button{
+    color: red;
 }
 .center{
     display: flex;
     justify-content: center;
     align-items: center;
 }
- 
+div{
+    background: transparent;
+}
+body{
+    background-color: #f5f5f5;
+}
+label {
+    background: transparent;
+    display: block;
+    margin-bottom: .3rem;
+    font-size: .9rem;
+    font-weight: bold;
+    color: #05060f99;
+    transition: color .3s cubic-bezier(.25,.01,.25,1) 0s;
+}
 button {
     background-color: #FFFFFF;
     border: 1px solid rgba(0, 0, 0, 0.1);
@@ -62,7 +85,7 @@ button:active {
 div input{
     height: 40px;
 }
-input {
+input , .textarea{
     background-color: #F4F4F4;
     border: none;
     border-radius: 10px;
@@ -81,7 +104,7 @@ input {
     transition: all 0.3s ease-in-out;
     border-bottom: 2px #85878600 solid;
 }
-input:focus {
+input:focus, .textarea:focus {
     background-color: #EAEAEA;
     border-bottom: 2px #858786 solid;
 }
@@ -106,21 +129,14 @@ input:invalid {
 a{
     text-decoration: none;
     background: transparent;
-    color: unset;
-}
-nav a{
-    text-decoration: none;
-    font-weight: 500;
-    margin: 10px;
-    background: transparent;
-    color: rgba(255, 255, 255, 0.825);
+    color: white;
 }
 header{
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px 10%;
-    background-color: #55828b;
+    background-color: #4a7279;
 }
 .site-name{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -132,14 +148,31 @@ header{
     color: black;
     padding: 0px 20px;
 }
-.navbar a{
+/* nav a{
+    text-decoration: none;
+    font-weight: 500;
+    margin: 10px;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.825);
+} */
+.navbar-item{
+    text-decoration: none;
+    font-weight: 500;
+    margin: 10px;
+    background: transparent;
+    
     border-bottom: 2px #ffffff00 solid;
     transition: all 0.3s ease-in-out;
 }
-.navbar a:hover{
+.navbar:hover >  .navbar-item{
+    opacity: 0.5;
+}
+.navbar:hover >  .navbar-item:hover{
+    opacity: 1;
+}
+.navbar .navbar-item:hover,.navbar .navbar-item:active{
     scale: 1.02;
-    border-bottom: 2px #ffffff solid;    
-    color: white;   
+    border-bottom: 2px #ffffff solid;      
 }
 .nav-buttons{
     background: transparent;
@@ -160,7 +193,7 @@ header{
 .nav-buttons button:first-child{
     margin-right: 20px;
 }
-.bg-transparent{
+.bg-transparent, *{
     background: transparent;
 }
 .mb-2{
@@ -168,11 +201,11 @@ header{
 }
 
 .add-post-btn {
-    padding: 17px 40px;
+    padding: 17px 20px;
     align-self: flex-end;
-    border-radius: 50px;
+    border-radius: 20px;
     cursor: pointer;
-    border: 0;
+    border: 1px dimgray solid;
     background-color: white;
     box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
     letter-spacing: 1.5px;
@@ -183,16 +216,62 @@ header{
   
 .add-post-btn:hover {
     letter-spacing: 3px;
-    background-color: hsl(261deg 80% 48%);
-    color: hsl(0, 0%, 100%);
-    box-shadow: rgb(93 24 220) 0px 7px 29px 0px;
+    background-color: #4a7279;
+    color: #ffffff;
+    box-shadow: #4a7279 0px 7px 29px 0px;
 }
   
 .add-post-btn:active {
     letter-spacing: 3px;
-    background-color: hsl(261deg 80% 48%);
-    color: hsl(0, 0%, 100%);
-    box-shadow: rgb(93 24 220) 0px 0px 0px 0px;
+    background-color: #4a7279;
+    color: #ffffff;
+    box-shadow: #4a7279 0px 0px 0px 0px;
     transform: translateY(10px);
     transition: 100ms;
 }
+.post{
+    background: white;
+    height: 100px;
+    transition: all 0.8s ease;
+    border-radius: 10px;
+    padding-top: 5px;
+    padding-bottom: 25px;
+    padding-right: 25px;
+    padding-left: 25px;
+    overflow: hidden;
+}
+.post:hover{
+    border: 1px gray solid;
+}
+
+hr:first-child{
+    visibility: hidden;
+}
+hr{
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(17, 17, 17, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+.del-btn:hover{
+    background-color: #c41b1b;
+    color: white;
+}
+
+.loader {
+    border-radius: 50%;
+    border: 4px solid rgba(0, 0, 0, .1);
+    border-left-color: transparent;
+    width: 36px;
+    height: 36px;
+    animation: spin89345 1s linear infinite;
+  }
+  
+  @keyframes spin89345 {
+    0% {
+      transform: rotate(0deg);
+    }
+  
+    100% {
+      transform: rotate(360deg);
+    }
+  }
