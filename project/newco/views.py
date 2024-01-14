@@ -68,7 +68,9 @@ def register(request):
     return render(request,'newco/register.html',{'form': form})
 
 def listings(request):
-    return render(request,'newco/listings.html')
+    jobs = list(Job.objects.all())
+    jobs = reversed(jobs)
+    return render(request,'newco/listings.html',{'jobs':jobs})
 def profile(request,username):
     if User.objects.filter(username=username):
         return render(request,'newco/profile.html',{'username':username})
@@ -104,10 +106,10 @@ def posts(request):
     job = Job.objects.filter(user=request.user)
     job = reversed(job)
     return render(request,'newco/postedjobs.html',{'jobs':job})
+
 def delete_job(request:HttpRequest,job_id):
     if request.method == 'GET':
         job = Job.objects.filter(id=int(job_id))
-        job = get_object_or_404(Job,id=int(job_id))
         job.delete()
         messages.success(request,f'Deleted job successfully')
         return redirect('newco-posted')

@@ -1,4 +1,29 @@
 {% extends 'newco/layout.html' %}
+{% include 'newco/messages.html' %}
 {% block body %}
-
+{% if jobs %}
+    <div class="w-100 h-auto center"> 
+        <div class="w-50 d-block m-3">
+            {% for job in jobs %}
+                <hr>
+                <a href="posted/{{ job.id }}" class="w-100">
+                    <div class="post form w-100 flex-row">
+                        <div class="flex-column w-100">
+                            <div class="w-100 lead" style="font-weight: 600;">{{ job.title }}  </div>
+                            <div class="w-100 ">Rs. {{ job.salary }}</div>
+                            <div class="w-100 " >{{ job.location }}</div>
+                            <div class="w-100 " style="opacity: 0.5;">{{ job.description }}</div>
+                        </div>
+                    </a>
+                    <div class="d-inline-flex flex-row-reverse"><a href="profile/{{ job.user.username }}">u/{{ job.user.username }}</a></div>
+                    <div class="w-25 center"><a href=""><button type="button" class="apply-btn">Apply</button></a></div>                    
+                </div>
+            {% endfor %}
+        </div>         
+    </div>         
+{% else %}
+<div class="w-100 h-25 center">
+    No jobs posted yet    
+</div>
+{% endif %}
 {% endblock %}

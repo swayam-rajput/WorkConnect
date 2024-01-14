@@ -94,3 +94,14 @@ function validateJobForm() {
     // If all fields are valid, return true to submit the form
     return true;
 }
+function loader(){
+    console.log('called')
+    setTimeout(() => {
+        document.getElementById('loader-div').id='l-div'
+        console.log(document.getElementById('l-div'))
+    }, 5);
+    setTimeout(() => {
+        document.getElementById('l-div').id='loader-div'
+        console.log(document.getElementById('loader-div'))
+    }, 10000);
+}

@@ -129,7 +129,7 @@ input:invalid {
 a{
     text-decoration: none;
     background: transparent;
-    color: white;
+    /* color: white; */
 }
 header{
     display: flex;
@@ -148,19 +148,12 @@ header{
     color: black;
     padding: 0px 20px;
 }
-/* nav a{
-    text-decoration: none;
-    font-weight: 500;
-    margin: 10px;
-    background: transparent;
-    color: rgba(255, 255, 255, 0.825);
-} */
 .navbar-item{
     text-decoration: none;
     font-weight: 500;
     margin: 10px;
     background: transparent;
-    
+    color: white;
     border-bottom: 2px #ffffff00 solid;
     transition: all 0.3s ease-in-out;
 }
@@ -232,12 +225,13 @@ header{
 .post{
     background: white;
     height: 100px;
+
     transition: all 0.8s ease;
     border-radius: 10px;
     padding-top: 5px;
     padding-bottom: 25px;
     padding-right: 25px;
-    padding-left: 25px;
+    padding-left: 15px;
     overflow: hidden;
 }
 .post:hover{
