@@ -11,6 +11,9 @@ from django.contrib.auth import authenticate,login,logout
 from .models import UserProfile,Job
 
 # Create your views here.
+def custom_404(request,exception):
+    return render(request, 'newco/404.html')
+
 def log_in(request,user_name=None,psd=None):
     if request.method == 'POST':   
         username = request.POST['username']
@@ -131,5 +134,36 @@ def apply(request:HttpRequest,job_id=None):
         if job_id:
             jobs = Job.objects.get(id=int(job_id))
             jobs.applied.add(request.user)
+            messages.success(request,f'Applied for the job')
+        
         jobs = Job.objects.filter(applied=request.user)
-        return render(request,'newco/postedjobs.html',{'jobs': jobs} )
+        if jobs.count() == 0:
+            jobs=None    
+        else:
+            jobs = reversed(jobs)
+    # return redirect('newco-applied')
+    return render(request,'newco/postedjobs.html',{'jobs': jobs} )
+
+def unapply(request,job_id):
+    if job_id:
+        jobs = Job.objects.get(id=int(job_id))
+        jobs.applied.remove(request.user)
+        jobs = Job.objects.filter(applied=request.user)
+        messages.success(request,f'Unapplied from the job successfully')
+        if jobs.count() == 0:
+            jobs=None    
+        else:
+            jobs = reversed(jobs)
+        
+    return redirect('newco-applied')
+def job_profile(request,job_id):
+    job = Job.objects.get(id=job_id)
+    applied = job.applied.all()
+    if applied.count() == 0:
+        applied = None
+    
+
+    return render(request,'newco/jobprofile.html',{
+        'job':job,
+        'applied':applied
+    })

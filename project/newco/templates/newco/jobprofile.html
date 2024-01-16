@@ -1,0 +1,55 @@
+{% extends 'newco/layout.html' %}
+{% block body %}
+<div class="w-100 h-auto mt-3 center bg-transparent flex-column"> 
+    <div class="h-auto p-2 form" style="width: 500px;">
+        <legend class="heading mt-5 mb-2">{{ job.title }}</legend>
+        <div class="center w-100 flex-column">
+
+            <div class="w-75 mb-4">
+                <label class="label" for="job_specification">Job</label>
+                <input class="w-100 en" name="job_specification"  value="{{ job.job_specification }}" disabled type="text">
+            </div>
+            
+            <div class="w-75 mb-4">
+                <label class="label" for="salary">Salary</label>
+                <input class="w-100 en" pattern="\w+" name="salary" disabled type="text" value="{{ job.salary }}">
+            </div>
+            
+            <div class="w-75 mb-4">
+                <label class="label" for="description">Description</label>
+                <textarea class="w-100 h-75 textarea en" name="description" disabled type="text">{{ job.description }}</textarea>
+            </div>
+
+            <div class="w-75 mb-4">
+                <label class="label" for="location">Location</label>
+                <input class="w-100 en" name="location" disabled type="text" value="{{ job.location }}">
+            </div>
+            {% if request.user == job.user %}
+            <div class="w-75 mb-4">
+                <label class="label" for="applied">Applied by</label>
+                {% if applied %}
+                    <ol>
+                        {% for i in applied %}
+                        <li style="padding-left: 5px;">
+    
+                            <a class="a-hover d-inline-block" href="/newco/profile/{{ i }}">{{ i }}</a>
+                        </li>
+                        
+                        {% endfor %}
+
+                    </ol>
+                {% else %}
+                    <input class="w-100 en" name="applied" disabled type="text" value="No users applied yet">
+                {% endif %}
+            </div>
+
+            {% endif %}
+                       
+        </div>
+        
+        <div class="center">
+            <button type="button" class="mb-4" id="edit-btn" onclick="enableInputs(`{% url 'newco-home' %}`)">Edit</button>
+        </div>
+    </div>
+</div>
+{% endblock %}

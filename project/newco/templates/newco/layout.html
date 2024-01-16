@@ -15,13 +15,13 @@
 <body>
     {% block nav-header %}
     <header>
-        <div class="site-name">Newco</div>
+        <div class="site-name" style="color: white;">WorkConnect</div>
         <nav class="navbar">
             <a class="navbar-item" href="{% url 'newco-home' %}">Home</a>
             {% if user.is_authenticated %} 
                 <a class="navbar-item" href="{% url 'newco-posted' %}">Posted</a>
                 <a class="navbar-item" href="{% url 'newco-add-job' %}">Post Jobs</a>
-                <a class="navbar-item" href="{% url 'newco-apply' %}">Applied</a>
+                <a class="navbar-item" href="{% url 'newco-applied' %}">Applied</a>
             {% endif %}
             <a class="navbar-item" href="{% url 'newco-listings' %}">Job Listing</a>
             
@@ -31,6 +31,7 @@
                 {% if user.is_authenticated %}
                     <a href="{% url 'newco-profile' request.user.username %}"><button>Profile</button></a>
                     <a href="{% url 'newco-logout' %}"><button class="logout-btn">Log Out</button></a>
+                    
                 {% else %}
                     <a href="{% url 'newco-register' %}"><button>Register</button></a>
                     <a href="{% url 'newco-login' %}"><button>Log In</button></a>

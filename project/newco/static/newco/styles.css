@@ -5,7 +5,9 @@
     color: black;
     background-color: #f5f5f5;
 }
-
+/* .en{
+    border-bottom: 2px #858786 solid;
+} */
 .center{
     display: flex;
     justify-content: center;
@@ -268,3 +270,5 @@ button.apply-btn{
       transform: rotate(360deg);
     }
 }
+
+

@@ -93,3 +93,17 @@ function validateJobForm() {
     return true;
 }
 
+function enableInputs(str) {
+    var elements = document.getElementsByClassName('en');
+    for (var i = 0; i < elements.length; i++) {
+        elements[i].removeAttribute('disabled');
+        elements[i].style.borderBottom = '2px #858786 solid'
+    }
+    console.log(str)
+    button = document.getElementById('edit-btn');
+    button.textContent = 'Save';
+    button.onclick= ()=>{
+        window.location.href=str;
+    }
+    
+}

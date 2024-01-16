@@ -10,8 +10,8 @@
                     <div class="post form w-100 flex-row">
                         <div class="flex-column w-100">
                             <div class="w-100 lead" style="font-weight: 600;">{{ job.title }}</div>
-                            <div class="w-100">Rs. {{ job.salary }}</div>
                             <div class="w-100">{{ job.job_specification }}</div>
+                            <div class="w-100">Rs. {{ job.salary }}</div>
                             <div class="w-100">Location: {{ job.location }}</div>
                             <!-- <div class="w-100" style="opacity: 0.5;">{{ job.description }}</div> -->
                         </div>
@@ -26,7 +26,7 @@
                                     <button type="button" class="">Apply</button>
                                 </a>
                             {% else %}                                    
-                                <button type="button" disabled class="">Applied</button>                                    
+                                <button type="button" disabled style="cursor: not-allowed;">Applied</button>                                    
                             {% endif %}
                             </div>
                     {% else %}                    

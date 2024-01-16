@@ -11,7 +11,7 @@
             
             <div class="w-75 mb-4">
                 <label class="label" for="email">Email</label>
-                <input class="w-100" id="email" name="email"  value="{{ loggeduser.email }}" disabled type="text">
+                <input class="w-100 en" id="email" name="email"  value="{{ loggeduser.email }}" disabled type="text">
             </div>
             
             <div class="w-75 mb-4">
@@ -21,18 +21,19 @@
             
             <div class="w-75 mb-4">
                 <label class="label" for="age">Age</label>
-                <input class="w-100" id="age" name="age" disabled type="text"  value="{{ loggeduser.age }}">
+                <input class="w-100 en" id="age" name="age" disabled type="text"  value="{{ loggeduser.age }}">
             </div>
 
             <div class="w-75 mb-4">
-                <label class="label" for="phno">Phone Number</label>
-                <input class="w-100" id="phno" name="phno" disabled type="text" value="{{ loggeduser.phno }}">
+                <label class="label" for="phno">Fucking Contact them</label>
+                <input class="w-100 en" id="phno" name="phno" disabled type="text" value="{{ loggeduser.phno }}">
             </div>           
         </div>
-        
-        <div class="center">
-            <button type="button" class="mb-4">Edit</button>
-        </div>
+        {% if request.user == job.user %}
+            <div class="center">
+                <button type="button" class="mb-4" id="edit-btn" onclick="enableInputs(`{% url 'newco-applied' %}`)">Edit</button>
+            </div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}
