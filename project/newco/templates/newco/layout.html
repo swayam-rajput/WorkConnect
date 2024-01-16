@@ -21,15 +21,15 @@
             {% if user.is_authenticated %} 
                 <a class="navbar-item" href="{% url 'newco-posted' %}">Posted</a>
                 <a class="navbar-item" href="{% url 'newco-add-job' %}">Post Jobs</a>
-                <a class="navbar-item" href="">Applied</a>
+                <a class="navbar-item" href="{% url 'newco-apply' %}">Applied</a>
             {% endif %}
             <a class="navbar-item" href="{% url 'newco-listings' %}">Job Listing</a>
             
         </nav>
         <div class="nav-buttons">
             {% block nav-icons %}
-                {% if user.is_authenticated %} 
-                    <a href=""><button>Profile</button></a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'newco-profile' request.user.username %}"><button>Profile</button></a>
                     <a href="{% url 'newco-logout' %}"><button class="logout-btn">Log Out</button></a>
                 {% else %}
                     <a href="{% url 'newco-register' %}"><button>Register</button></a>

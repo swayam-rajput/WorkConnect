@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=255)),
                 ('description', models.TextField()),
-                ('job_specification', models.CharField(max_length=255)),
+                ('job_spec', models.CharField(max_length=255)),
                 ('salary', models.CharField(max_length=32)),
                 ('location', models.CharField(max_length=32)),
                 ('people_applied', models.IntegerField(default=0)),

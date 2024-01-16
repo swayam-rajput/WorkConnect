@@ -2,22 +2,9 @@
 
 {% block title %}Add Job{% endblock %}
 {% block body %}
-<div class="w-auto h-auto mt-4 center bg-transparent flex-column"> 
-    {% if messages %}
-        <div class="center bg-transparent w-100" style="z-index: 1; position: fixed; pointer-events: none; opacity: 0.8;">
-            <div class="col-md-3 mt-5 center bg-transparent w-100">
-                {% for message in messages %}
-                    {% if message.tags == 'error' %}
-                        <div class="alert alert-danger">
-                    {% else %}
-                        <div class="alert alert-{{ message.tags }}">
-                    {% endif %}
-                            {{ message }}
-                        </div>
-                {% endfor %}
-            </div>
-        </div>
-    {% endif %}
+{% include 'newco/messages.html' %}
+
+<div class="w-auto h-auto mt-3 center bg-transparent flex-column"> 
     <form action="" method="post" onsubmit="return validateJobForm()" class="w-50 h-auto p-2 form" >
 
     {% csrf_token %}

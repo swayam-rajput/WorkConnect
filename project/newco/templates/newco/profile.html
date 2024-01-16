@@ -1,8 +1,38 @@
 {% extends 'newco/layout.html' %}
 {% block body %}
-<div class="w-100 h-25 center">
-    
-    User {{ username }} Profile
-</div>
+<div class="w-100 h-auto mt-3 center bg-transparent flex-column"> 
+    <div class="h-auto p-2 form" style="width: 500px;">
+        <legend class="heading mt-4 mb-2">{{ loggeduser.username }}'s Profile</legend>
+        <div class="center w-100 flex-column">
+            <div class="w-75 mb-4">
+                <label class="label" for="username">Username</label>
+                <input class="w-100" id="username" name="username"  value="{{ loggeduser.username }}" disabled type="text">
+            </div>
+            
+            <div class="w-75 mb-4">
+                <label class="label" for="email">Email</label>
+                <input class="w-100" id="email" name="email"  value="{{ loggeduser.email }}" disabled type="text">
+            </div>
+            
+            <div class="w-75 mb-4">
+                <label class="label" for="gender">Gender</label>
+                <input class="w-100" pattern="\w+" id="gender" name="gender" disabled type="text" value="{{ loggeduser.gender }}">
+            </div>
+            
+            <div class="w-75 mb-4">
+                <label class="label" for="age">Age</label>
+                <input class="w-100" id="age" name="age" disabled type="text"  value="{{ loggeduser.age }}">
+            </div>
 
+            <div class="w-75 mb-4">
+                <label class="label" for="phno">Phone Number</label>
+                <input class="w-100" id="phno" name="phno" disabled type="text" value="{{ loggeduser.phno }}">
+            </div>           
+        </div>
+        
+        <div class="center">
+            <button type="button" class="mb-4">Edit</button>
+        </div>
+    </div>
+</div>
 {% endblock %}

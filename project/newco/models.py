@@ -17,7 +17,7 @@ class Job(models.Model):
     salary = models.CharField(max_length=32)
     location = models.CharField(max_length=32)
     people_applied = models.IntegerField(default=0)
-    applied = models.ManyToManyField(User,related_name='users_applied')
+    applied = models.ManyToManyField(User,related_name='users_applied',blank=True)
 
     def __str__(self):
         return f'{self.title}'

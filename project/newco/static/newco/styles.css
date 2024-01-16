@@ -1,25 +1,11 @@
 *{
-    /* color-scheme: dark; */
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'Segoe UI';
     margin: 0;
     padding: 0;
     color: black;
     background-color: #f5f5f5;
 }
-::-webkit-scrollbar {
-    width: 10px;
-    background-color: #333;
-}
-::-webkit-scrollbar-thumb{
-    color: #4a7279;
-}
-::-webkit-scrollbar-track{
-    color: red;
 
-}
-::-webkit-scrollbar-button{
-    color: red;
-}
 .center{
     display: flex;
     justify-content: center;
@@ -48,7 +34,7 @@ button {
     color: rgba(0, 0, 0, 0.85);
     cursor: pointer;
     display: inline-flex;
-    font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    /* font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif; */
     font-size: 16px;
     font-weight: 600;
     justify-content: center;
@@ -82,9 +68,11 @@ button:active {
     color: rgba(0, 0, 0, 0.65);
     transform: translateY(0);
 }
+
 div input{
     height: 40px;
 }
+
 input , .textarea{
     background-color: #F4F4F4;
     border: none;
@@ -144,7 +132,7 @@ header{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 10%;
+    padding: 15px 8%;
     background-color: #4a7279;
 }
 .site-name{
@@ -166,13 +154,13 @@ header{
     border-bottom: 2px #ffffff00 solid;
     transition: all 0.3s ease-in-out;
 }
-.navbar:hover >  .navbar-item{
+.navbar:hover > .navbar-item{
     opacity: 0.5;
 }
-.navbar:hover >  .navbar-item:hover{
+.navbar:hover > .navbar-item:hover{
     opacity: 1;
 }
-.navbar .navbar-item:hover,.navbar .navbar-item:active{
+.navbar-item:hover, .navbar-item:active ,.navbar-item:focus{
     scale: 1.02;
     border-bottom: 2px #ffffff solid;      
 }
@@ -188,7 +176,6 @@ header{
 }
 .nav-buttons button:hover{
     border: 2px #bfc0c0 solid;
-    
     color: black;
     background-color:#bfc0c0;
 }
@@ -205,7 +192,7 @@ header{
 .add-post-btn {
     padding: 17px 20px;
     align-self: flex-end;
-    border-radius: 20px;
+    border-radius: 10px;
     cursor: pointer;
     border: 1px dimgray solid;
     background-color: white;
@@ -233,8 +220,7 @@ header{
 }
 .post{
     background: white;
-    height: 100px;
-
+    height: 115px;
     transition: all 0.8s ease;
     border-radius: 10px;
     padding-top: 5px;
@@ -253,14 +239,16 @@ hr:first-child{
 hr{
     border: 0;
     height: 1px;
-    background-image: linear-gradient(to right, rgba(17, 17, 17, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
 }
+
 .del-btn:hover{
     background-color: #c41b1b;
     color: white;
 }
-.apply-btn:hover{
-    background-color: #06D6A0;
+button.apply-btn{
+    color: white;
+    background-color: #4a7279;
 }
 .loader {
     border-radius: 50%;

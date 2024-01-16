@@ -5,30 +5,34 @@
 {% if jobs %}
 <div class="w-100 h-auto center"> 
     <div class="w-50 d-block m-3">
-        {% for job in jobs %}
-            
+        {% for job in jobs %} 
         <hr>
-            <a href="newco/posted/{{ job.id }}" class="w-100">
+            <a href="post/{{ job.id }}" class="w-100">
                 <div class="post column form w-100 flex-row">
                     <div class="flex-column w-100">
-                        
                         <div class="w-100 lead" style="font-weight: 600;">
                             {{ job.title }}
                         </div>
                         <div class="w-100 ">{{ job.job_specification }}</div>
                         <div class="w-100 ">Rs. {{ job.salary }}</div>
-                        <div class="w-100 " style="opacity: 0.5;">{{ job.description }}</div>
-                        <div class="w-100 " >Location{{ job.location }}</div>
+                        <div class="w-100 " >Location: {{ job.location }}</div>
                     </div>
                 </a>
-                    <div class="w-25 center"><a href="delete/{{ job.id }}"><button type="button"  class="del-btn">Delete</button></a></div>
-                </div>
-                
+                {% if request.user == job.user %}
+                    <div class="w-25 center" style="height: 90px;"><a href="delete/{{ job.id }}"><button type="button" class="del-btn">Delete</button></a></div>
+                {% else %}
+                    <div class="w-25 center" style="height: 90px;"><a href="unapply/{{ job.id }}"><button type="button" class="del-btn">Unapply</button></a></div>
+                {% endif %}
+            </div>
         {% endfor %}            
     </div>
+{% elif request.user not in job.applied.all %}
+    <div class="w-100 h-75 center">
+        <div class="display-6 h1" >You haven't applied any jobs yet</div>   
+    </div>
 {% else %}
-<div class="w-100 h-25 center">
-    No jobs posted yet    
-</div>
+    <div class="w-100 h-75 center">
+        <div class="display-6 h1" >You haven't posted any jobs yet</div>   
+    </div>
 {% endif %}
 {% endblock %}

@@ -6,26 +6,29 @@
         <div class="w-50 d-block m-3">
             {% for job in jobs %}
                 <hr>
-                <a href="posted/{{ job.id }}" class="w-100">
+                <a href="post/{{ job.id }}" class="w-100">
                     <div class="post form w-100 flex-row">
                         <div class="flex-column w-100">
-                            <div class="w-100 lead" style="font-weight: 600;">{{ job.title }}  </div>
+                            <div class="w-100 lead" style="font-weight: 600;">{{ job.title }}</div>
                             <div class="w-100">Rs. {{ job.salary }}</div>
-                            <div class="w-100">{{ job.location }}</div>
-                            <div class="w-100" style="opacity: 0.5;">{{ job.description }}</div>
+                            <div class="w-100">{{ job.job_specification }}</div>
+                            <div class="w-100">Location: {{ job.location }}</div>
+                            <!-- <div class="w-100" style="opacity: 0.5;">{{ job.description }}</div> -->
                         </div>
-                    </a>
-                    {% if user.is_authenticated == False %}
-                        
-                    {% elif job.user.username != request.user.username %}
+                    </a> 
+                    {% if job.user.username != request.user.username %}
                         <div class="d-inline-flex flex-row-reverse" style="height: 25px; transition: all 0.3s;">
-                            <a href="profile/{{ job.user.username }}" class="a-hover">u/{{ job.user.username }}</a>
+                            <a href="" class="a-hover">u/{{ job.user.username }}</a>
                         </div>
-                        <div class="w-25 center">
-                            <a href="">
-                                <button type="button" class="apply-btn">Apply</button>
-                            </a>
-                        </div>
+                        <div class="w-25 center" style="height: 90px;">
+                            {% if request.user not in job.applied.all %}
+                                <a href="post/apply/{{ job.id }}">
+                                    <button type="button" class="">Apply</button>
+                                </a>
+                            {% else %}                                    
+                                <button type="button" disabled class="">Applied</button>                                    
+                            {% endif %}
+                            </div>
                     {% else %}                    
                         <div class="d-inline-flex flex-row-reverse" style="height: 25px; transition: all 0.3s;">
                             <a href="profile/{{ job.user.username }}" class="a-hover">you</a>
