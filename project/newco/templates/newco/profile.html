@@ -1,8 +1,13 @@
 {% extends 'newco/layout.html' %}
 {% block body %}
-<div class="w-100 h-auto mt-3 center bg-transparent flex-column"> 
-    <div class="h-auto p-2 form" style="width: 500px;">
-        <legend class="heading mt-4 mb-2">{{ loggeduser.username }}'s Profile</legend>
+<div class="w-100 h-75 mt-3 center bg-transparent flex-column"> 
+    <form class="h-auto p-2 form" style="width: 500px;">
+        
+        {% if request.user.username in request.path %}
+            <legend class="heading mt-4 mb-2">Your Profile</legend>
+        {% else %}
+            <legend class="heading mt-4 mb-2">{{ loggeduser.username }}'s Profile</legend>
+        {% endif %}
         <div class="center w-100 flex-column">
             <div class="w-75 mb-4">
                 <label class="label" for="username">Username</label>
@@ -23,17 +28,24 @@
                 <label class="label" for="age">Age</label>
                 <input class="w-100 en" id="age" name="age" disabled type="text"  value="{{ loggeduser.age }}">
             </div>
-
-            <div class="w-75 mb-4">
-                <label class="label" for="phno">Fucking Contact them</label>
-                <input class="w-100 en" id="phno" name="phno" disabled type="text" value="{{ loggeduser.phno }}">
-            </div>           
+            {% if request.user is loggeduser %}
+                <div class="w-75 mb-4">
+                    <label class="label" for="phno">Contact</label>
+                    <input class="w-100 en" id="phno" name="phno" disabled type="text" value="{{ loggeduser.phno }}">
+                </div>
+            {% endif %}
         </div>
-        {% if request.user == job.user %}
+        {% if request.user.username == loggeduser.username %}
             <div class="center">
                 <button type="button" class="mb-4" id="edit-btn" onclick="enableInputs(`{% url 'newco-applied' %}`)">Edit</button>
             </div>
+            <div class="center">
+                <button type="button" class="mb-4" id="edit-btn" hidden onclick="enableInputs(`{% url 'newco-applied' %}`)">Save</button>
+            </div>
+            <div class="center">
+                <button type="button" class="mb-4" id="cncl-btn" hidden>Clear</button>
+            </div>
         {% endif %}
-    </div>
+    </form>
 </div>
 {% endblock %}

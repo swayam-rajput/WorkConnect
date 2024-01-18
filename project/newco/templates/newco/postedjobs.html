@@ -7,7 +7,7 @@
     <div class="w-50 d-block m-3">
         {% for job in jobs %} 
         <hr>
-            <a href="post/{{ job.id }}" class="w-100">
+            <a href="{% url 'newco-job-profile' job.id %}" class="w-100">
                 <div class="post column form w-100 flex-row">
                     <div class="flex-column w-100">
                         <div class="w-100 lead" style="font-weight: 600;">{{ job.title }}</div>

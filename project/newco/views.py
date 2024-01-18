@@ -74,17 +74,6 @@ def listings(request):
     jobs = reversed(jobs)
     return render(request,'newco/listings.html',{'jobs':jobs})
 
-@login_required
-def profile(request,uname):
-    try:
-        user = User.objects.get(username=uname)
-        user_dict = model_to_dict(user)
-        u1 = UserProfile.objects.get(user=request.user)
-        u1_dict = model_to_dict(u1)
-        user_dict.update(u1_dict)
-        return render(request, 'newco/profile.html', {'loggeduser': user_dict})
-    except User.DoesNotExist:
-        return HttpResponse(f'Error: User {uname} does not exist')
     
 @login_required
 def addjob(request:HttpRequest):
@@ -156,14 +145,27 @@ def unapply(request,job_id):
             jobs = reversed(jobs)
         
     return redirect('newco-applied')
+
+
 def job_profile(request,job_id):
     job = Job.objects.get(id=job_id)
     applied = job.applied.all()
     if applied.count() == 0:
         applied = None
-    
 
     return render(request,'newco/jobprofile.html',{
         'job':job,
         'applied':applied
     })
+
+@login_required
+def profile(request,uname):
+    try:
+        user = User.objects.get(username=uname)
+        user_dict = model_to_dict(user)
+        u1 = UserProfile.objects.get(user=request.user)
+        u1_dict = model_to_dict(u1)
+        user_dict.update(u1_dict)
+        return render(request, 'newco/profile.html', {'loggeduser': user_dict})
+    except User.DoesNotExist:
+        return HttpResponse(f'Error: User {uname} does not exist')

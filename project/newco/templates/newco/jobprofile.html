@@ -39,17 +39,23 @@
 
                     </ol>
                 {% else %}
-                    <input class="w-100 en" name="applied" disabled type="text" value="No users applied yet">
+                   <label class="w-100 en" name="applied" >No users have applied yet</label>
                 {% endif %}
             </div>
 
+            {% else %}
+            <div class="w-75 center">
+                <label class="label">Thanks for applying</label>
+                <label class="label">Wait for <a href="{% url 'newco-profile' job.user.username %}" class="a-hover">{{ job.user.username }}</a> to contact you</label>
+            </div>
             {% endif %}
                        
         </div>
-        
-        <div class="center">
-            <button type="button" class="mb-4" id="edit-btn" onclick="enableInputs(`{% url 'newco-home' %}`)">Edit</button>
-        </div>
+        {% if request.user == job.user %}
+            <div class="center">
+                <button type="button" class="mb-4" id="edit-btn" onclick="enableInputs(`{% url 'newco-home' %}`)">Edit</button>
+            </div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}
