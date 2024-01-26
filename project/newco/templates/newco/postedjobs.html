@@ -7,7 +7,7 @@
     <div class="w-50 d-block m-3">
         {% for job in jobs %} 
         <hr>
-            <a href="{% url 'newco-job-profile' job.id %}" class="w-100">
+            <a href="{% url 'job-profile' job.id %}" class="w-100">
                 <div class="post column form w-100 flex-row">
                     <div class="flex-column w-100">
                         <div class="w-100 lead" style="font-weight: 600;">{{ job.title }}</div>
@@ -19,7 +19,7 @@
                 {% if request.user == job.user %}
                     <div class="w-25 center" style="height: 90px;"><a href="delete/{{ job.id }}"><button type="button" class="del-btn">Delete</button></a></div>
                 {% else %}
-                    <div class="w-25 center" style="height: 90px;"><a href="{% url 'newco-unapply' job.id %} "><button type="button" class="del-btn">Unapply</button></a></div>
+                    <div class="w-25 center" style="height: 90px;"><a href="{% url 'unapply' job.id %} "><button type="button" class="del-btn">Unapply</button></a></div>
                 {% endif %}
             </div>
         {% endfor %}            

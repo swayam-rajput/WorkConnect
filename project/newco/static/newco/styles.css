@@ -28,6 +28,9 @@ body{
     color: #05060f99;
     transition: color .3s cubic-bezier(.25,.01,.25,1) 0s;
 }
+td{
+    text-align: center;
+}
 button {
     background-color: #FFFFFF;
     border: 1px solid rgba(0, 0, 0, 0.1);
@@ -91,7 +94,7 @@ input , .textarea{
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.5s ease-in-out;
     border-bottom: 2px #85878600 solid;
 }
 input:focus, .textarea:focus {
@@ -123,18 +126,17 @@ a{
 }
 .a-hover{
     transition: all 0.5s;
-    border-bottom: 1px #4a727900 solid;
+    border-bottom: 2px #4a727900 solid;
 }
 .a-hover:hover{
     scale: 1.02;
-    color: #4a7279;
-    border-bottom: 1px #4a7279 solid;
+    border-bottom: 2px #0e57c5a8 solid;
 }
 header{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 8%;
+    padding: 15px 4%;
     background-color: #4a7279;
 }
 .site-name{
@@ -152,19 +154,21 @@ header{
     font-weight: 500;
     margin: 10px;
     background: transparent;
-    color: white;
+    color: rgba(255, 255, 255, 0.978);
     border-bottom: 2px #ffffff00 solid;
     transition: all 0.3s ease-in-out;
 }
+.navbar-item-focus{
+    border-bottom: 2px #ffffff solid;
+}
 .navbar:hover > .navbar-item{
-    opacity: 0.5;
+    opacity: 1;
 }
 .navbar:hover > .navbar-item:hover{
-    opacity: 1;
+    opacity: 0.6;
 }
 .navbar-item:hover, .navbar-item:active ,.navbar-item:focus{
     scale: 1.02;
-    border-bottom: 2px #ffffff solid;      
 }
 .nav-buttons{
     background: transparent;
@@ -223,7 +227,7 @@ header{
 .post{
     background: white;
     height: 115px;
-    transition: all 0.8s ease;
+    transition: all 0.6s ease;
     border-radius: 10px;
     padding-top: 5px;
     padding-bottom: 25px;
@@ -240,12 +244,19 @@ hr:first-child{
 }
 hr{
     border: 0;
-    height: 1px;
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    border-top: 0.5px solid black;
 }
 
 .del-btn:hover{
     background-color: #c41b1b;
+    color: white;
+}
+.edit-btn:hover{
+    background-color: #3d5a98;
+    color: white;
+}
+.save-btn:hover{
+    background-color: #61988E;
     color: white;
 }
 button.apply-btn{

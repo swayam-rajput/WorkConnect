@@ -1,0 +1,46 @@
+{% extends 'newco/layout.html' %}
+{% block body %}
+{% include 'newco/messages.html' %}
+{% if request.user.username == jobs.first.user.username %}
+<div class="w-100 h-auto center"> 
+    <div class="w-50 d-block m-3">
+        {% for job in jobs %}
+            <hr>
+            <h2 class="text-center m-4 display-6">Applicants for {{ job.title }}</h2>
+
+                {% if job.applied.all %}
+                    <table class="table table-bordered  text-center mt-5">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Job Title</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            {% for applicant in job.applied.all %}
+                                <tr class="text-center">
+                                    <td>{{ forloop.counter }}</td>
+                                    <td><a href="{% url 'profile' applicant %}" class="a-hover">u/{{ applicant.username }}</a></td>
+                                    <td>{{ job.title }}</td>
+                                    <td class="flex-row" style="width: 300px;gap:10px;">
+                                        <a href="">
+                                            <button class="logout-btn">View</button>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>    
+                {% else %}
+                <div class="h-100 lead center">
+                    No applicants for this job yet
+                </div>    
+                {% endif %}
+            {% endfor %}
+            <hr>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

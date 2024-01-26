@@ -93,17 +93,50 @@ function validateJobForm() {
     return true;
 }
 
-function enableInputs(str) {
+function enableInputs(str,bool) {
     var elements = document.getElementsByClassName('en');
     for (var i = 0; i < elements.length; i++) {
-        elements[i].removeAttribute('disabled');
-        elements[i].style.borderBottom = '2px #858786 solid'
-    }
-    console.log(str)
-    button = document.getElementById('edit-btn');
-    button.textContent = 'Save';
-    button.onclick= ()=>{
-        window.location.href=str;
-    }
-    
+        if(bool){
+            elements[i].removeAttribute('disabled');
+            elements[i].style.borderBottom = '2px #858786 solid'
+            document.getElementById('edit-div').hidden=true;
+            document.getElementById('save-div').removeAttribute('hidden');
+        }else{
+            elements[i].disabled = true;
+            elements[i].style.borderBottom = 'initial'
+            document.getElementById('edit-div').hidden=bool;
+            document.getElementById('save-div').hidden=true;
+            
+        }
+    }    
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Get all navbar items
+    const classname = "navbar-item-focus"; 
+    var navbarItems = document.querySelectorAll('.navbar-item');
+    function setActiveNavItem() {
+        var currentUrl = window.location.href;
+
+        navbarItems.forEach(function(item) {
+            var targetUrl = item.getAttribute('href');
+
+            if (currentUrl.includes(targetUrl)) {
+                navbarItems.forEach(function(navItem) {
+                    navItem.classList.remove(classname);
+                });
+                item.classList.add(classname);
+            }
+        });
+    }
+    setActiveNavItem();
+    navbarItems.forEach(function(item) {
+        item.addEventListener('click', function() {
+            navbarItems.forEach(function(navItem) {
+                navItem.classList.remove(classname);
+            });
+            item.classList.add(classname);
+        });
+    });
+});
+

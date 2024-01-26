@@ -1,7 +1,7 @@
 {% extends 'newco/layout.html' %}
 {% block body %}
-<div class="w-100 h-75 mt-3 center bg-transparent flex-column"> 
-    <form class="h-auto p-2 form" style="width: 500px;">
+<div class="w-100 h-auto mt-3 center bg-transparent flex-column"> 
+    <form class="h-auto mt-3 form" style="width: 500px;">
         
         {% if request.user.username in request.path %}
             <legend class="heading mt-4 mb-2">Your Profile</legend>
@@ -28,7 +28,7 @@
                 <label class="label" for="age">Age</label>
                 <input class="w-100 en" id="age" name="age" disabled type="text"  value="{{ loggeduser.age }}">
             </div>
-            {% if request.user is loggeduser %}
+            {% if request.user.username == loggeduser.username or is_applied %}
                 <div class="w-75 mb-4">
                     <label class="label" for="phno">Contact</label>
                     <input class="w-100 en" id="phno" name="phno" disabled type="text" value="{{ loggeduser.phno }}">
@@ -36,15 +36,17 @@
             {% endif %}
         </div>
         {% if request.user.username == loggeduser.username %}
-            <div class="center">
-                <button type="button" class="mb-4" id="edit-btn" onclick="enableInputs(`{% url 'newco-applied' %}`)">Edit</button>
+        <div class="center" style="gap: 10px;">
+            <div class="center" id="edit-div">
+                <button type="button" class="mb-4 edit-btn" onclick="enableInputs(`{% url 'applied' %}`,true)">Edit</button>
+            </div>
+            <div class="center" id="save-div" hidden>
+                <button type="button" class="mb-4 save-btn" >Save</button>
             </div>
             <div class="center">
-                <button type="button" class="mb-4" id="edit-btn" hidden onclick="enableInputs(`{% url 'newco-applied' %}`)">Save</button>
+                <button type="button" class="mb-4 del-btn" onclick="enableInputs(`{% url 'applied' %}`,false)">Clear</button>
             </div>
-            <div class="center">
-                <button type="button" class="mb-4" id="cncl-btn" hidden>Clear</button>
-            </div>
+        </div>
         {% endif %}
     </form>
 </div>

@@ -3,7 +3,6 @@ from django.http import HttpResponse, HttpRequest
 from django.db import IntegrityError
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.forms.models import model_to_dict
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
@@ -22,7 +21,7 @@ def log_in(request,user_name=None,psd=None):
         if user is not None:
             login(request,user)
             messages.success(request,f'User {username} logged in')
-            return redirect('newco-home')
+            return redirect('home')
         else:
             messages.error(request,f'Invalid credentials')
     return render(request,'newco/login.html')
@@ -32,12 +31,12 @@ def log_out(request:HttpRequest):
     username = request.user.get_username()
     logout(request)
     messages.success(request,f'User {username} logged out')
-    return redirect('newco-login')
+    return redirect('login')
 
-@login_required
+
 def homepage(request):
     if not request.user.is_authenticated:
-        return redirect('newco-login')
+        return redirect('login')
         
     return render(request,'newco/home.html')
     
@@ -58,7 +57,7 @@ def register(request):
                 user_profile = UserProfile.objects.create(user=user, age=age, phno=phno, gender=gender)
                 user_profile.save()
                 messages.success(request, f'User {username} registered')
-                return redirect('newco-login')
+                return redirect('login')
             else:
                 messages.error(request, f'Passwords do not match')
         except IntegrityError as e:
@@ -68,14 +67,14 @@ def register(request):
         form = UserCreationForm()
     return render(request,'newco/register.html',{'form': form})
 
-@login_required
+
 def listings(request):
     jobs = Job.objects.all()
     jobs = reversed(jobs)
     return render(request,'newco/listings.html',{'jobs':jobs})
 
     
-@login_required
+
 def addjob(request:HttpRequest):
     """Creates a new job based on the information provided via the form"""
     if request.method == 'POST':
@@ -97,11 +96,11 @@ def addjob(request:HttpRequest):
                 location=location
             )
             messages.success(request,f'Posted Job')
-        return redirect('newco-posted')
+        return redirect('posted')
         # redirect to the jobs posted page to view the posted job and display the message there
     return render(request,'newco/addjob.html')
 
-@login_required
+
 def posts(request):
     job = Job.objects.filter(user=request.user)
     if job.count() == 0:
@@ -110,13 +109,13 @@ def posts(request):
         job = reversed(job)
     return render(request,'newco/postedjobs.html',{'jobs':job})
 
-@login_required
+
 def delete_job(request:HttpRequest,job_id):
     if request.method == 'GET':
         job = Job.objects.filter(id=int(job_id))
         job.delete()
         messages.success(request,f'Deleted job successfully')
-        return redirect('newco-posted')
+        return redirect('posted')
     
 def apply(request:HttpRequest,job_id=None):
     if request.method == 'GET':
@@ -130,7 +129,7 @@ def apply(request:HttpRequest,job_id=None):
             jobs=None    
         else:
             jobs = reversed(jobs)
-    # return redirect('newco-applied')
+    # return redirect('applied')
     return render(request,'newco/postedjobs.html',{'jobs': jobs} )
 
 def unapply(request,job_id):
@@ -144,7 +143,7 @@ def unapply(request,job_id):
         else:
             jobs = reversed(jobs)
         
-    return redirect('newco-applied')
+    return redirect('applied')
 
 
 def job_profile(request,job_id):
@@ -152,20 +151,48 @@ def job_profile(request,job_id):
     applied = job.applied.all()
     if applied.count() == 0:
         applied = None
+    if request.method == 'POST':
+        description = request.POST.get('description')
+        job_spec = request.POST.get('job_specification')
+        salary = request.POST.get('salary')
+        location = request.POST.get('location')
+        job.description = description
+        job.job_specification=job_spec
+        job.salary=salary
+        job.location=location
+        job.save()
+        messages.success(request,f'Edited post')
 
     return render(request,'newco/jobprofile.html',{
         'job':job,
         'applied':applied
     })
 
-@login_required
+
 def profile(request,uname):
     try:
         user = User.objects.get(username=uname)
-        user_dict = model_to_dict(user)
-        u1 = UserProfile.objects.get(user=request.user)
-        u1_dict = model_to_dict(u1)
-        user_dict.update(u1_dict)
-        return render(request, 'newco/profile.html', {'loggeduser': user_dict})
+        u1 = UserProfile.objects.get(user=user)
+        if request.method == 'POST':
+            messages.success(request,f'Edited profile')
+        else:
+            user_dict = model_to_dict(user)
+            u1_dict = model_to_dict(u1)
+            user_dict.update(u1_dict)
+            user_profile = get_object_or_404(UserProfile, user=user)
+            user_in_applied_job = Job.objects.filter(applied=user).exists()
+
+        return render(request, 'newco/profile.html', {'loggeduser': user_dict,'is_applied':user_in_applied_job})
     except User.DoesNotExist:
         return HttpResponse(f'Error: User {uname} does not exist')
+    
+def jobapplicants(request:HttpRequest,job_id):
+    job = Job.objects.get(id=job_id)
+    applied = job.applied.select_related('userprofile').all()
+    if applied.count() == 0:
+        applied = None
+    return render(request,'newco/applicants.html',{'job':job,'applied':applied})
+
+def allapplicants(request):
+    jobs = Job.objects.filter(user=request.user)
+    return render(request,'newco/allapplicants.html',{'jobs':jobs})

@@ -5,7 +5,7 @@
 {% include 'newco/messages.html' %}
 
 <div class="w-auto h-auto mt-3 center bg-transparent flex-column"> 
-    <form action="" method="post" onsubmit="return validateJobForm()" class="w-50 h-auto p-2 form" >
+    <form action="" method="post" onsubmit="return validateJobForm()" class="w-50 h-auto p-1 form" >
 
     {% csrf_token %}
         <legend class="heading mt-4 mb-2">Add Job Post</legend>
@@ -27,7 +27,7 @@
             
             <div class="w-75 mb-4">
                 <label class="label" for="salary">Salary</label>
-                <input class="w-100" id="salary" name="salary" type="text"  placeholder="eg. 3000-5000">
+                <input class="w-100" id="salary" name="salary" type="text"  placeholder="eg. 6000">
             </div>
 
             <div class="w-75 mb-4">
@@ -39,7 +39,7 @@
           
 
     <div class="center">
-        <button type="submit" class="add-post-btn mb-4">Add Job</button>
+        <button type="submit" class="mb-4 save-btn">Add Job</button>
     </div>
     </form>
 </div>
