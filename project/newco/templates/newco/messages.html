@@ -1,15 +1,16 @@
 {% if messages %}
-    <div class="bg-transparent w-100" style="align-items: end;z-index: 1; position: absolute; pointer-events: none;">
-        <div class="mt-5 center bg-transparent w-100" style="opacity: 0.8;">
+    <!-- <div class="bg-transparent h-100 w-100" style="align-content: end;position: absolute;z-index:1; pointer-events: none;"> -->
+        <!-- <div class="mt-5 bg-transparent w-25" style="justify-content: end;align-content: end;opacity: 0.8;"> -->
+        <div class="alert-div">
             {% for message in messages %}
                 {% if message.tags == 'error' %}
-                    <div class="alert alert-danger">
+                    <div class="alert center alert-danger">
                 {% else %}
-                    <div class="alert alert-{{ message.tags }}">
+                    <div class="alert center alert-{{ message.tags }}">
                 {% endif %}
                         {{ message }}
                     </div>
             {% endfor %}
-        </div>
+        <!-- </div> -->
     </div>
 {% endif %}

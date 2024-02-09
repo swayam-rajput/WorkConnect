@@ -2,41 +2,41 @@
 {% block body %}
 {% include 'newco/messages.html' %}
 <div class="w-100 h-auto mt-3 center bg-transparent flex-column"> 
-    <div class="h-auto p-2 form" style="width: 500px;">
-        <form action="" method="post">
+    <div class="h-auto p-1 form" style="width: 600px;">
+        <form action="" class="mb-4" method="post">
             {% csrf_token %}
             <legend class="heading mt-5 mb-2">{{ job.title }}</legend>
-            <div class="center w-100 flex-column">
+            <div class="center w-100 mb-3 flex-column">
 
-            <div class="w-75 mb-4">
-                <label class="label" for="job_specification">Job</label>
-                <input class="w-100 en" name="job_specification"  value="{{ job.job_specification }}" disabled type="text">
+                <div class="w-75 mb-4">
+                    <label class="label" for="job_specification">Job</label>
+                    <input class="w-100 en" name="job_specification"  value="{{ job.job_specification }}" disabled type="text">
+                </div>
+                
+                <div class="w-75 mb-4">
+                    <label class="label" for="salary">Salary</label>
+                    <input class="w-100 en" pattern="\w+" name="salary" disabled type="text" value="{{ job.salary }}">
+                </div>
+                
+                <div class="w-75 mb-4">
+                    <label class="label" for="description">Description</label>
+                    <textarea class="w-100 h-75 textarea en" name="description" disabled type="text">{{ job.description }}</textarea>
+                </div>
+                
+                <div class="w-75 mb-2">
+                    <label class="label" for="location">Location</label>
+                    <input class="w-100 en" name="location" disabled type="text" value="{{ job.location }}">
+                </div>
+                {% if request.user in applied %}
+                <div class="center mt-3 d-inline-block">
+                    <label class="label center">Thanks for applying</label>
+                </div>
+                <label class="label">Wait for <a href="{% url 'profile' job.user.username %}" class="a-hover">{{ job.user.username }}</a> to contact you</label>
+                {% endif %}
+                
             </div>
-            
-            <div class="w-75 mb-4">
-                <label class="label" for="salary">Salary</label>
-                <input class="w-100 en" pattern="\w+" name="salary" disabled type="text" value="{{ job.salary }}">
-            </div>
-            
-            <div class="w-75 mb-4">
-                <label class="label" for="description">Description</label>
-                <textarea class="w-100 h-75 textarea en" name="description" disabled type="text">{{ job.description }}</textarea>
-            </div>
-            
-            <div class="w-75 mb-2">
-                <label class="label" for="location">Location</label>
-                <input class="w-100 en" name="location" disabled type="text" value="{{ job.location }}">
-            </div>
-            {% if request.user in applied %}
-            <div class="center mt-3 d-inline-block">
-                <label class="label center">Thanks for applying</label>
-            </div>
-            <label class="label">Wait for <a href="{% url 'profile' job.user.username %}" class="a-hover">{{ job.user.username }}</a> to contact you</label>
-            {% endif %}
-            
-        </div>
         {% if request.user == job.user %}
-        <div class="center" style="gap: 10px;">
+        <div class="center mt-2" style="gap: 10px;">
             <div class="center" id="edit-div">
                 <button type="button" class="mb-2 edit-btn" onclick="enableInputs(`{% url 'home' %}`,true)">Edit</button>
             </div>
@@ -44,12 +44,14 @@
                 <button type="submit" class="mb-2 save-btn">Save</button>
             </div>
             <div class="center">
-                <button type="button" class="mb-2 del-btn" id="cncl-btn" onclick="enableInputs(`{% url 'login' %}`,false)">Cancel</button>
+                <button type="button" class="mb-2 del-btn" id="cncl-btn" hidden onclick="enableInputs(`{% url 'login' %}`,false)">Cancel</button>
+                <a href="{% url 'delete' job.id %}">
+                    <button type="button" class="mb-2 del-btn" id="del-btn">Delete</button>
+                </a>
             </div>
         </div>
         <div class="center">
             <a href="{% url 'applicant' job.id %}">
-                
                 <button type="button" class="mb-2">View Applicants</button>
             </a>
         </div>

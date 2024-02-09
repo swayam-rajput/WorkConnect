@@ -100,19 +100,27 @@ function enableInputs(str,bool) {
             elements[i].removeAttribute('disabled');
             elements[i].style.borderBottom = '2px #858786 solid'
             document.getElementById('edit-div').hidden=true;
+            if(document.getElementById('del-btn')){
+                document.getElementById('del-btn').hidden=true;
+            }
             document.getElementById('save-div').removeAttribute('hidden');
+            document.getElementById('cncl-btn').removeAttribute('hidden');
         }else{
             elements[i].disabled = true;
             elements[i].style.borderBottom = 'initial'
             document.getElementById('edit-div').hidden=bool;
+            if(document.getElementById('del-btn')){
+                document.getElementById('del-btn').hidden=false;
+            }
             document.getElementById('save-div').hidden=true;
+            document.getElementById('cncl-btn').hidden=true;
             
         }
     }    
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Get all navbar items
+    
     const classname = "navbar-item-focus"; 
     var navbarItems = document.querySelectorAll('.navbar-item');
     function setActiveNavItem() {
@@ -138,5 +146,5 @@ document.addEventListener('DOMContentLoaded', function() {
             item.classList.add(classname);
         });
     });
+    
 });
-

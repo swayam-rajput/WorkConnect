@@ -2,11 +2,12 @@
 {% block title %}Home{% endblock %}
 {% block body %}    
 {% include 'newco/messages.html' %}    
-<div class="w-100 h-50 mt-5 flex-column" style="background-color: white;"> 
-    <div class="w-100 center">
-        <input type="text" name="" id="">
-        <input type="text" name="" id="">
-        <button type="button">Submit</button>
+
+<div class="w-100 flex-column" style="height:88%;background-color: white;"> 
+    <div class="center h-100" style="gap: 20px;">
+        <input type="text" name="" id="" placeholder="Job title">
+        <input type="text" name="" id="" placeholder="location">
+        <button type="button">Search Job</button>
     </div>
 </div>
 {% endblock %}

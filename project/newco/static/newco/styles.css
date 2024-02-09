@@ -58,7 +58,7 @@ button {
 button:hover,
 button:focus {
     border-color: rgba(0, 0, 0, 0.15);
-    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+    box-shadow: rgba(0, 0, 0, 0.174) 0 4px 12px;
     color: rgba(0, 0, 0, 0.65);
 }
 
@@ -126,11 +126,12 @@ a{
 }
 .a-hover{
     transition: all 0.5s;
-    border-bottom: 2px #4a727900 solid;
+    border-bottom: 2px #0d6efd00 solid;
 }
 .a-hover:hover{
     scale: 1.02;
-    border-bottom: 2px #0e57c5a8 solid;
+    /* border-bottom: 2px #0e57c5a8 solid; */
+    border-bottom: 2px #2779f4 solid;
 }
 header{
     display: flex;
@@ -239,24 +240,38 @@ header{
     border: 1px gray solid;
 }
 
-hr:first-child{
+hr:first-child,hr:last-child{
     visibility: hidden;
 }
 hr{
     border: 0;
     border-top: 0.5px solid black;
 }
-
+.del-btn{
+    /* border: 1px solid #c41b1b; */
+    color: #c41b1b;
+}
+.edit-btn{
+    /* border: 1px solid #3d5a98; */
+    color: #3d5a98;
+}
+.save-btn{
+    /* border: 1px solid #61988E; */
+    color: #61988E;
+}
 .del-btn:hover{
     background-color: #c41b1b;
+    box-shadow: #c41b1b8a 0 4px 12px;
     color: white;
 }
 .edit-btn:hover{
     background-color: #3d5a98;
+    box-shadow: #3d5a98a1 0 4px 12px;
     color: white;
 }
 .save-btn:hover{
     background-color: #61988E;
+    box-shadow: #61988e9e 0 4px 12px;
     color: white;
 }
 button.apply-btn{
@@ -283,3 +298,19 @@ button.apply-btn{
 }
 
 
+.alert-div{
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 25%;
+    opacity: 0.8;
+    z-index: 1;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    margin-bottom: 20px;
+    opacity: 0.9;
+}

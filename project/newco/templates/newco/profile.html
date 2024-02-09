@@ -1,12 +1,13 @@
 {% extends 'newco/layout.html' %}
 {% block body %}
+{% include 'newco/messages.html' %}
 <div class="w-100 h-auto mt-3 center bg-transparent flex-column"> 
-    <form class="h-auto mt-3 form" style="width: 500px;">
-        
+    <form method="post" class="h-auto mt-3 form" style="width: 500px;">
+        {% csrf_token %}
         {% if request.user.username in request.path %}
-            <legend class="heading mt-4 mb-2">Your Profile</legend>
+            <legend class="heading mt-5 mb-2">Your Profile</legend>
         {% else %}
-            <legend class="heading mt-4 mb-2">{{ loggeduser.username }}'s Profile</legend>
+            <legend class="heading mt-5 mb-2">{{ loggeduser.username }}'s Profile</legend>
         {% endif %}
         <div class="center w-100 flex-column">
             <div class="w-75 mb-4">
@@ -21,7 +22,7 @@
             
             <div class="w-75 mb-4">
                 <label class="label" for="gender">Gender</label>
-                <input class="w-100" pattern="\w+" id="gender" name="gender" disabled type="text" value="{{ loggeduser.gender }}">
+                <input class="w-100" id="gender" name="gender" disabled type="text" value="{{ loggeduser.gender }}">
             </div>
             
             <div class="w-75 mb-4">
@@ -31,7 +32,7 @@
             {% if request.user.username == loggeduser.username or is_applied %}
                 <div class="w-75 mb-4">
                     <label class="label" for="phno">Contact</label>
-                    <input class="w-100 en" id="phno" name="phno" disabled type="text" value="{{ loggeduser.phno }}">
+                    <input class="w-100 en" pattern="\d{0,10}" id="phno" name="phno" disabled type="text" value="{{ loggeduser.phno }}">
                 </div>
             {% endif %}
         </div>
@@ -41,10 +42,10 @@
                 <button type="button" class="mb-4 edit-btn" onclick="enableInputs(`{% url 'applied' %}`,true)">Edit</button>
             </div>
             <div class="center" id="save-div" hidden>
-                <button type="button" class="mb-4 save-btn" >Save</button>
+                <button type="submit" class="mb-4 save-btn" >Save</button>
             </div>
             <div class="center">
-                <button type="button" class="mb-4 del-btn" onclick="enableInputs(`{% url 'applied' %}`,false)">Clear</button>
+                <button type="button" class="mb-4 del-btn" id="cncl-btn" hidden onclick="enableInputs(`{% url 'applied' %}`,false)">Cancel</button>
             </div>
         </div>
         {% endif %}

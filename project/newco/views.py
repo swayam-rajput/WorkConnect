@@ -70,7 +70,10 @@ def register(request):
 
 def listings(request):
     jobs = Job.objects.all()
-    jobs = reversed(jobs)
+    if jobs.count() == 0:
+        jobs = None
+    else:
+        jobs = reversed(jobs)
     return render(request,'newco/listings.html',{'jobs':jobs})
 
     
@@ -102,12 +105,12 @@ def addjob(request:HttpRequest):
 
 
 def posts(request):
-    job = Job.objects.filter(user=request.user)
-    if job.count() == 0:
-        job = None
+    jobs = Job.objects.filter(user=request.user)
+    if jobs.count() == 0:
+        jobs = None
     else:
-        job = reversed(job)
-    return render(request,'newco/postedjobs.html',{'jobs':job})
+        jobs = reversed(jobs)
+    return render(request,'newco/postedjobs.html',{'jobs':jobs})
 
 
 def delete_job(request:HttpRequest,job_id):
@@ -169,18 +172,23 @@ def job_profile(request,job_id):
     })
 
 
-def profile(request,uname):
+def profile(request:HttpRequest,uname):
     try:
         user = User.objects.get(username=uname)
         u1 = UserProfile.objects.get(user=user)
         if request.method == 'POST':
+            if user.email != request.POST.get('email'):
+                user.email = request.POST.get('email')
+                user.save()
+            u1.age = request.POST.get('age')
+            u1.phno = request.POST.get('phno')
+            u1.save()
             messages.success(request,f'Edited profile')
-        else:
-            user_dict = model_to_dict(user)
-            u1_dict = model_to_dict(u1)
-            user_dict.update(u1_dict)
-            user_profile = get_object_or_404(UserProfile, user=user)
-            user_in_applied_job = Job.objects.filter(applied=user).exists()
+        user_dict = model_to_dict(user)
+        user_in_applied_job = Job.objects.filter(applied=user).exists()
+        u1_dict = model_to_dict(u1)
+        user_dict.update(u1_dict)
+        user_profile = get_object_or_404(UserProfile, user=user)
 
         return render(request, 'newco/profile.html', {'loggeduser': user_dict,'is_applied':user_in_applied_job})
     except User.DoesNotExist:

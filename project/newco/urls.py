@@ -15,7 +15,9 @@ urlpatterns = [
     path('profile/<str:uname>',views.profile,name='profile'),
     path('posts',views.posts,name='posted'),
     path('listings',views.listings,name='listings'),
+    
     path('listings/<str:filterby>',views.listings,name='listings'),
+    
     path('delete/<int:job_id>',views.delete_job,name='delete'),
     path('post/apply/<int:job_id>',views.apply,name='apply'),
     path('post/<int:job_id>',views.job_profile,name='job-profile'),

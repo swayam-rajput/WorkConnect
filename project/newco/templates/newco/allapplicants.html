@@ -15,7 +15,7 @@
                                 <th>#</th>
                                 <th>Name</th>
                                 <th>Job Title</th>
-                                <th>Actions</th>
+                                <th>Contact</th>
                             </tr>
                         </thead>
                         <tbody class="text-center">
@@ -26,7 +26,8 @@
                                     <td>{{ job.title }}</td>
                                     <td class="flex-row" style="width: 300px;gap:10px;">
                                         <a href="">
-                                            <button class="logout-btn">View</button>
+                                            <!-- <button class="logout-btn">View</button> -->
+                                            <div class="center">{{ applicant.userprofile.phno }}</div>
                                         </a>
                                     </td>
                                 </tr>
