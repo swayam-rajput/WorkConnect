@@ -8,7 +8,10 @@
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     transition: .4s ease-in-out;
 }
-.form:hover {
+.noboxshadow{
+    box-shadow: none;
+}
+.form:not(.nothover):hover {
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
     scale: 0.99;
 }

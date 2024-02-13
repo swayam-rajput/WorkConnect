@@ -68,15 +68,16 @@ def register(request):
     return render(request,'newco/register.html',{'form': form})
 
 
-def listings(request):
+def listings(request,filterby=None):
+    # add functionality to display only filtered jobs
+    if filterby:
+        pass
     jobs = Job.objects.all()
     if jobs.count() == 0:
         jobs = None
     else:
         jobs = reversed(jobs)
     return render(request,'newco/listings.html',{'jobs':jobs})
-
-    
 
 def addjob(request:HttpRequest):
     """Creates a new job based on the information provided via the form"""
@@ -152,8 +153,8 @@ def unapply(request,job_id):
 def job_profile(request,job_id):
     job = Job.objects.get(id=job_id)
     applied = job.applied.all()
-    if applied.count() == 0:
-        applied = None
+    # if applied.count() == 0:
+    #     applied = None
     if request.method == 'POST':
         description = request.POST.get('description')
         job_spec = request.POST.get('job_specification')
@@ -165,7 +166,7 @@ def job_profile(request,job_id):
         job.location=location
         job.save()
         messages.success(request,f'Edited post')
-
+    print(applied)
     return render(request,'newco/jobprofile.html',{
         'job':job,
         'applied':applied

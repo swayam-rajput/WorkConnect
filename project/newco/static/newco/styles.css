@@ -313,4 +313,36 @@ button.apply-btn{
     align-items: center;
     margin-bottom: 20px;
     opacity: 0.9;
+} 
+.tooltiptext {
+    width: fit-content;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 10px;
+    position: fixed;
+    z-index: -1;
+    top: 125%;
+    opacity: 0;
+    transition: all 0.2s;
 }
+  
+button:hover .tooltiptext {
+    opacity: 1;
+}
+.tooltiptext::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: rotate(180deg);
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+}
+  
+  
+  
+  

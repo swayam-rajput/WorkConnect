@@ -2,7 +2,7 @@
 {% block body %}
 {% include 'newco/messages.html' %}
 <div class="w-100 h-auto mt-3 center bg-transparent flex-column"> 
-    <form method="post" class="h-auto mt-3 form" style="width: 500px;">
+    <form method="post" class="h-auto mt-3 form nothover mb-3" style="width: 450px;">
         {% csrf_token %}
         {% if request.user.username in request.path %}
             <legend class="heading mt-5 mb-2">Your Profile</legend>

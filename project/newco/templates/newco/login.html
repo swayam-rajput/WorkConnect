@@ -1,26 +1,11 @@
 {% extends 'newco/layout.html' %}
 {% load static %}
-
 {% block css %}<link rel="stylesheet" href="{% static 'newco/log.reg.styles.css' %}">{% endblock %}
-    
+
 {% block title %}Login{% endblock %}
 {% block nav-header %}{% endblock %}
 {% block body %}
-{% if messages %}
-    <div class="center bg-transparent w-100" style="position: absolute; pointer-events: none; opacity: 0.7;">
-        <div class="col-md-3 mt-5 center bg-transparent w-100">
-            {% for message in messages %}
-                {% if message.tags == 'error' %}
-                    <div class="alert alert-danger">
-                {% else %}
-                    <div class="alert alert-{{ message.tags }}">
-                {% endif %}
-                        {{ message }}
-                    </div>
-            {% endfor %}
-        </div>
-    </div>
-{% endif %}
+{% include 'newco/messages.html' %}    
 <div class="w-auto h-100 center flex-column"> 
     <form action="" method="post" class="form" style="height: 400px;">
         {% csrf_token %}

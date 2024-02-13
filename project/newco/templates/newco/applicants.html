@@ -24,10 +24,8 @@
                                 <td><a href="{% url 'profile' applicant %}" class="a-hover">u/{{ applicant.username }}</a></td>
                                 <td>{{ job.title }}</td>
                                 <td class="flex-row" style="width: 300px;gap:10px;">
-                                    <a href="">
-                                        <!-- <button class="logout-btn">View</button> -->
-                                        <div class="center">{{ applicant.userprofile.phno }}</div>
-                                    </a>
+                                    <!-- <button class="logout-btn">View</button> -->
+                                    <div class="center">{{ applicant.userprofile.phno }}</div>
                                 </td>
                             </tr>
                         {% endfor %}

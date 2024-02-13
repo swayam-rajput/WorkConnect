@@ -1,14 +1,14 @@
 {% extends 'newco/layout.html' %}
 {% load static %}
-
 {% block css %}<link rel="stylesheet" href="{% static 'newco/log.reg.styles.css' %}">{% endblock %}
-    
+
 
 {% block title %}Register{% endblock %}
 {% block nav-header %}
 {% endblock %}
 
 {% block body %}
+{% include 'newco/messages.html' %}    
 {# bootstrap css height of input needs to be adjusted as per the height of the form #}
 <div class="w-auto h-100 center"> 
     <form action="" method="post" onsubmit="return validateRegistration()" class="form" style="height: 600px;">
@@ -63,23 +63,6 @@
         </div>
     </form>
     
-
-    <div class="center bg-transparent w-100" style="position: absolute; pointer-events: none; opacity: 0.7;">
-        <div class="col-md-5 center bg-transparent w-100">
-            {% if messages %}
-                {% for message in messages %}
-                    {% if message.tags == 'error' %}
-                        <div class="alert alert-danger">
-                    {% else %}
-                        <div class="alert alert-{{ message.tags }}">
-                    {% endif %}
-                            {{ message }}
-                        </div>
-                        </div>
-                {% endfor %}
-            {% endif %}
-        
-    </div>
 </div>
 </div>
 

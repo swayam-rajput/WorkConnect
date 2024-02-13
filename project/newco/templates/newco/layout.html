@@ -28,7 +28,7 @@
             {% block nav-icons %}
                 {% if user.is_authenticated %}
                     <a href="{% url 'add-job' %}"><button>Add Post</button></a>
-                    <a href="{% url 'profile' request.user.username %}"><button>Profile</button></a>
+                    <a href="{% url 'profile' request.user.username %}"><button>Profile<div class="tooltiptext">{{ request.user.username }}</div></button></a>
                     <a href="{% url 'logout' %}" id="logout-btn" class="navbar-item">Log Out</a>
                     
                 {% else %}
