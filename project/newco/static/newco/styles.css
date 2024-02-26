@@ -138,6 +138,7 @@ header{
     justify-content: space-between;
     align-items: center;
     padding: 15px 4%;
+    color: black;
     background-color: #4a7279;
 }
 .site-name{
@@ -157,7 +158,7 @@ header{
     background: transparent;
     color: rgba(255, 255, 255, 0.978);
     border-bottom: 2px #ffffff00 solid;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.1s ease-in-out;
 }
 .navbar-item-focus{
     border-bottom: 2px #ffffff solid;
@@ -305,6 +306,7 @@ button.apply-btn{
     transform: translateX(-50%);
     width: 25%;
     opacity: 0.8;
+    color: black;
     z-index: 1;
     pointer-events: none;
     display: flex;
@@ -345,4 +347,80 @@ button:hover .tooltiptext {
   
   
   
+.dummy{
+    /* box-sizing: border-box; */
+    background-color: #f3f2f1;
+    border-radius: 0.25rem;
+    /* align-items: center; */
+    font-size: .875rem;
+    font-weight: 700;
+    line-height: 1.3125rem;
+    color: #595959;
+    padding: 0.1875rem 0.5rem;
+    margin: 0 0.25rem 0.25rem 0;
+}
+.subnav{
+    background: #89a;
+    border-radius: 2px;
+    box-shadow: inset 0 1px 0 hsla(0,0%,100%,.35), 0 0 10px #000;
+    display: none;
+    left: -10px;
+    min-width: 100px;
+    padding-bottom: 5px;
+    position: absolute;
+    top: -3px;
+    z-index: 10000;
+
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+}
+.overlay:target {
+    visibility: visible;
+    opacity: 1;
+}
+.popup {
+    margin: 70px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    width: 30%;
+    position: relative;
+    transition: all 5s ease-in-out;
+}
   
+.popup .close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    transition: all 200ms;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+    opacity: 0.7;
+}
+.popup .close:hover {
+    opacity: 1;
+}
+.popup .content {
+    max-height: 30%;
+    overflow: auto;
+}
+  
+.profile-picture{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-left: 40px;
+}

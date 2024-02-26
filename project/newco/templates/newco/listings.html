@@ -2,8 +2,13 @@
 {% include 'newco/messages.html' %}
 {% block body %}
 {% if jobs %}
-    <div class="w-100 h-auto center"> 
+    <div class="w-100 h-auto center">
         <div class="w-50 d-block m-3">
+            {% if jobs.count != Job.objects.all %}
+                <div class="h5">Your Search Results</div> 
+            {% else %}
+                <div class="h5">Showing all jobs</div> 
+            {% endif %}
             {% for job in jobs %}
                 <hr>
                 <a href="post/{{ job.id }}" class="w-100">

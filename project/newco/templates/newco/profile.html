@@ -1,8 +1,12 @@
 {% extends 'newco/layout.html' %}
+{% load static %}
 {% block body %}
 {% include 'newco/messages.html' %}
-<div class="w-100 h-auto mt-3 center bg-transparent flex-column"> 
+<div class="w-100 h-auto mt-3 center bg-transparent flex-column">
     <form method="post" class="h-auto mt-3 form nothover mb-3" style="width: 450px;">
+        <!-- <div hidden class="d-flex position-absolute center justify-content-start" style="width: 420px;height: 100px;">
+            <img class="d-flex profile-picture" style="align-items: right;" src="{% static 'newco/wallpaper.jpg' %}" alt="{{ loggeduser.username }} pfp">
+        </div>  -->
         {% csrf_token %}
         {% if request.user.username in request.path %}
             <legend class="heading mt-5 mb-2">Your Profile</legend>
@@ -39,7 +43,10 @@
         {% if request.user.username == loggeduser.username %}
         <div class="center" style="gap: 10px;">
             <div class="center" id="edit-div">
-                <button type="button" class="mb-4 edit-btn" onclick="enableInputs(`{% url 'applied' %}`,true)">Edit</button>
+                <button type="button" class="mb-4 edit-btn" onclick="enableInputs(`{% url 'applied' %}`,true)">Update</button>
+            </div>
+            <div class="center">
+                <button type="button" class="mb-4 del-btn" id="del-acc-btn"><a href="#popup1" style="color: inherit;">Delete Account</a></button>
             </div>
             <div class="center" id="save-div" hidden>
                 <button type="submit" class="mb-4 save-btn" >Save</button>
@@ -49,6 +56,14 @@
             </div>
         </div>
         {% endif %}
+        <div id="popup1" class="overlay">
+            <div class="popup">
+                <a href="#" class="close">&times;</a>
+                <div class="content">
+                    Don't do it
+                </div>
+            </div>
+        </div>
     </form>
 </div>
 {% endblock %}

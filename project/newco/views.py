@@ -20,7 +20,7 @@ def log_in(request,user_name=None,psd=None):
         user = authenticate(request,username=username,password=password)
         if user is not None:
             login(request,user)
-            messages.success(request,f'User {username} logged in')
+            messages.success(request,f'User {username} logged in',extra_tags='success loggedin')
             return redirect('home')
         else:
             messages.error(request,f'Invalid credentials')
@@ -30,16 +30,10 @@ def log_out(request:HttpRequest):
     """Logs out the user associated with the request object"""
     username = request.user.get_username()
     logout(request)
-    messages.success(request,f'User {username} logged out')
+    messages.success(request,f'User {username} logged out',extra_tags='success loggedout')
     return redirect('login')
 
 
-def homepage(request):
-    if not request.user.is_authenticated:
-        return redirect('login')
-        
-    return render(request,'newco/home.html')
-    
 def register(request):
     """Register users directly to django admin"""
     if request.method == 'POST':
@@ -56,7 +50,7 @@ def register(request):
                 user = User.objects.create_user(username=username, email=email, password=password)
                 user_profile = UserProfile.objects.create(user=user, age=age, phno=phno, gender=gender)
                 user_profile.save()
-                messages.success(request, f'User {username} registered')
+                messages.success(request, f'User {username} registered',extra_tags='success registered')
                 return redirect('login')
             else:
                 messages.error(request, f'Passwords do not match')
@@ -68,16 +62,39 @@ def register(request):
     return render(request,'newco/register.html',{'form': form})
 
 
-def listings(request,filterby=None):
-    # add functionality to display only filtered jobs
-    if filterby:
-        pass
+def homepage(request):
+    jobs = Job.objects.values_list('job_specification', flat=True).distinct()
+    location = Job.objects.values_list('location', flat=True).distinct()
+    if request.method == 'POST':
+        title = request.POST.get('jobtitle')
+        loc = request.POST.get('location')
+        return redirect('listings',f'title={title}&location={loc}')
+
+    if not request.user.is_authenticated:
+        return redirect('login')
+    
+    return render(request,'newco/home.html',{'jobs':jobs,'location':location})
+    
+
+def listings(request: HttpRequest,filterby=None):
     jobs = Job.objects.all()
+    title = request.POST.get('jobtitle','').strip() 
+    location = request.POST.get('location','').strip()
+    
+    if title and location:
+        jobs = jobs.filter(job_specification=title.upper(),location=location)
+    
+    elif title or location:
+        if title:
+            jobs = jobs.filter(job_specification=title.upper())
+        if location:
+            jobs = jobs.filter(location=location)
+
     if jobs.count() == 0:
         jobs = None
     else:
         jobs = reversed(jobs)
-    return render(request,'newco/listings.html',{'jobs':jobs})
+    return render(request, 'newco/listings.html', {'jobs': jobs})
 
 def addjob(request:HttpRequest):
     """Creates a new job based on the information provided via the form"""

@@ -8,7 +8,7 @@
         {% for job in jobs %} 
         <hr>
             <a href="{% url 'job-profile' job.id %}" class="w-100">
-                <div class="post column form w-100 flex-row">
+                <div class="post column nothover form w-100 flex-row">
                     <div class="flex-column w-100">
                         <div class="w-100 lead" style="font-weight: 600;">{{ job.title }}</div>
                         <div class="w-100 ">{{ job.job_specification }}</div>

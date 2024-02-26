@@ -9,22 +9,22 @@
             <div class="center w-100 mb-2 flex-column">
 
                 <div class="w-75 mb-4">
-                    <label class="label" for="job_specification">Job</label>
+                    <label class="label" for="job_specification">JOB</label>
                     <input class="w-100 en" name="job_specification"  value="{{ job.job_specification }}" disabled type="text">
                 </div>
                 
                 <div class="w-75 mb-4">
-                    <label class="label" for="salary">Salary</label>
+                    <label class="label" for="salary">SALARY</label>
                     <input class="w-100 en" pattern="\w+" name="salary" disabled type="text" value="{{ job.salary }}">
                 </div>
                 
                 <div class="w-75 mb-4">
-                    <label class="label" for="description">Description</label>
+                    <label class="label" for="description">DESCRIPTION</label>
                     <textarea class="w-100 h-75 textarea en" name="description" disabled type="text">{{ job.description }}</textarea>
                 </div>
                 
                 <div class="w-75 mb-2">
-                    <label class="label" for="location">Location</label>
+                    <label class="label" for="location">LOCATION</label>
                     <input class="w-100 en" name="location" disabled type="text" value="{{ job.location }}">
                 </div>
                 {% if request.user in applied %}
@@ -39,7 +39,7 @@
         {% if request.user == job.user %}
         <div class="center mt-2" style="gap: 10px;">
             <div class="center" id="edit-div">
-                <button type="button" class="mb-2 edit-btn" onclick="enableInputs(`{% url 'home' %}`,true)">Edit</button>
+                <button type="button" class="mb-2 edit-btn" onclick="enableInputs(`{% url 'home' %}`,true)">Update</button>
             </div>
             <div class="center" hidden id="save-div">
                 <button type="submit" class="mb-2 save-btn">Save</button>
