@@ -95,6 +95,8 @@ function validateJobForm() {
 
 function enableInputs(str,bool) {
     var elements = document.getElementsByClassName('en');
+
+    console.log(elements);
     for (var i = 0; i < elements.length; i++) {
         if(bool){
             elements[i].removeAttribute('disabled');
@@ -147,3 +149,48 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+function openFileInput() {
+    var fileInput = document.getElementById("pfp");
+    if (fileInput) {
+      fileInput.click();
+    }
+}
+
+
+document.getElementById('pfpimg').addEventListener('mouseleave', function() {
+    document.querySelector('#icon').style.opacity = 0;
+});
+document.getElementById('pfpimg').addEventListener('mouseenter', function() {
+    document.querySelector('#icon').style.opacity = 0.8;
+});
+function handleFileInputChange(event) {
+    const fileInput = event.target;
+    const file = fileInput.files[0];
+
+    // Check if a file was selected
+    if (file) {
+        // Get the file name and display it
+        const fileName = file.name;
+        console.log("Selected file:", fileName);
+
+        // Optional: You can display the selected image preview
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            const imageUrl = event.target.result;
+            // Display the image preview
+            const imgPreview = document.getElementById('pfpimg');
+            imgPreview.src = imageUrl;
+        };
+        reader.readAsDataURL(file);
+
+           // Optional: You can enable the save button or perform other actions
+        // const saveButton = document.getElementById('save-div');
+        // saveButton.hidden = false;
+        // const pfpanchor = document.getElementById('pfp-a')
+        // pfpanchor.click()
+    }
+}
+function profilepicUpdated(){
+    // document.getElementById('submit-img').click();
+}

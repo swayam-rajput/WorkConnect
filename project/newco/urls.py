@@ -1,6 +1,7 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
-
+from django.conf import settings
+from django.conf.urls.static import static
 from . import views
 
 handler404 = 'newco.views.custom_404'
@@ -25,5 +26,6 @@ urlpatterns = [
     path('post/unapply/<int:job_id>',views.unapply,name='unapply'),
     path('post/applied/',views.apply,name='applied'),
     path('post/<int:job_id>/applicants',views.jobapplicants,name='applicant'),
-    path('post/applicants',views.allapplicants,name='all-applicants')
-]
+    path('post/applicants',views.allapplicants,name='all-applicants'),
+    path('pfpupload',views.pfp_update,name='pfp-upload')
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

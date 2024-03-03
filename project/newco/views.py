@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.forms.models import model_to_dict
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.decorators import login_required
 
 from .models import UserProfile,Job
 
@@ -75,33 +76,32 @@ def homepage(request):
     
     return render(request,'newco/home.html',{'jobs':jobs,'location':location})
     
-
+@login_required
 def listings(request: HttpRequest,filterby=None):
     jobs = Job.objects.all()
+    
     title = request.POST.get('jobtitle','').strip() 
     location = request.POST.get('location','').strip()
     
     if title and location:
         jobs = jobs.filter(job_specification=title.upper(),location=location)
-    
     elif title or location:
         if title:
             jobs = jobs.filter(job_specification=title.upper())
         if location:
             jobs = jobs.filter(location=location)
-
     if jobs.count() == 0:
         jobs = None
     else:
-        jobs = reversed(jobs)
-    return render(request, 'newco/listings.html', {'jobs': jobs})
+        pass
+    return render(request, 'newco/listings.html', {'jobs': jobs,'searched':jobs.count()!=Job.objects.count()})
 
 def addjob(request:HttpRequest):
     """Creates a new job based on the information provided via the form"""
     if request.method == 'POST':
         title = request.POST.get('job-title')
         description = request.POST.get('job_description')
-        job_spec = request.POST.get('job-type')
+        job_specification = request.POST.get('job-type')
         salary = request.POST.get('salary')
         location = request.POST.get('location')
         if title == '':
@@ -112,7 +112,7 @@ def addjob(request:HttpRequest):
                 user=user,
                 title=title,
                 description=description,
-                job_specification=job_spec.upper(),
+                job_specification=job_specification.upper(),
                 salary=salary,
                 location=location
             )
@@ -174,11 +174,11 @@ def job_profile(request,job_id):
     #     applied = None
     if request.method == 'POST':
         description = request.POST.get('description')
-        job_spec = request.POST.get('job_specification')
+        job_specification = request.POST.get('job_specification')
         salary = request.POST.get('salary')
         location = request.POST.get('location')
         job.description = description
-        job.job_specification=job_spec
+        job.job_specification=job_specification
         job.salary=salary
         job.location=location
         job.save()
@@ -194,6 +194,7 @@ def profile(request:HttpRequest,uname):
     try:
         user = User.objects.get(username=uname)
         u1 = UserProfile.objects.get(user=user)
+        print(u1.profilepic.url)
         if request.method == 'POST':
             if user.email != request.POST.get('email'):
                 user.email = request.POST.get('email')
@@ -207,7 +208,7 @@ def profile(request:HttpRequest,uname):
         u1_dict = model_to_dict(u1)
         user_dict.update(u1_dict)
         user_profile = get_object_or_404(UserProfile, user=user)
-
+        print(u1.profilepic.url)
         return render(request, 'newco/profile.html', {'loggeduser': user_dict,'is_applied':user_in_applied_job})
     except User.DoesNotExist:
         return HttpResponse(f'Error: User {uname} does not exist')
@@ -222,3 +223,10 @@ def jobapplicants(request:HttpRequest,job_id):
 def allapplicants(request):
     jobs = Job.objects.filter(user=request.user)
     return render(request,'newco/allapplicants.html',{'jobs':jobs})
+
+def pfp_update(request:HttpRequest):
+    # add code to save the photo in the database
+    if request.method == 'POST':
+        print(request.POST.keys())
+        print('post')
+    return redirect('profile',uname=request.user)

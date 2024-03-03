@@ -12,8 +12,8 @@
                     <div class="flex-column w-100">
                         <div class="w-100 lead" style="font-weight: 600;">{{ job.title }}</div>
                         <div class="w-100 ">{{ job.job_specification }}</div>
-                        <div class="w-100 ">Rs. {{ job.salary }}</div>
-                        <div class="w-100 " >Location: {{ job.location }}</div>
+                        <div class="w-100 "><svg xmlns="http://www.w3.org/2000/svg" height="18" width="18" viewBox="50 -850 850 900" stroke-width="2" stroke="black"><path d="M540-172 306-416v-44h114q63 0 116-39.5T588-616H266v-28h320q-11-51-57-83.5T420-760H266v-28h428v28H528q33 17 57 48.5t29 67.5h80v28h-78q2 85-58 134.5T420-432h-90l249 260h-39Z"/></svg>{{ job.salary }}</div>
+                        <div class="w-100 " ><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>{{ job.location }}</div>
                     </div>
                 </a>
                 {% if request.user == job.user %}

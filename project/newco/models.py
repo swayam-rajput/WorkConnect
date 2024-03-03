@@ -5,7 +5,9 @@ class UserProfile(models.Model):
     age = models.IntegerField()
     phno = models.IntegerField()
     gender = models.CharField(max_length=8)
-    
+    is_verified = models.BooleanField(default=False)
+    profilepic = models.ImageField(default='default.jpg',unique=False,upload_to='profile_pics/')
+
     def __str__(self):
         return f'{self.user}'
 
@@ -13,7 +15,7 @@ class Job(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     description = models.TextField()
-    job_specification = models.CharField(max_length=255)
+    job_specification = models.CharField(default=None,max_length=255)
     salary = models.CharField(max_length=32)
     location = models.CharField(max_length=32)
     people_applied = models.IntegerField(default=0)

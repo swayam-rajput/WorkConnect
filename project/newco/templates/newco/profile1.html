@@ -1,0 +1,77 @@
+{% extends 'newco/layout.html' %}
+{% load static %}
+{% block body %}
+{% include 'newco/messages.html' %}
+<div class="w-100 h-auto mt-3 center bg-transparent flex-column">
+    <form method="post" class="h-auto mt-3 form nothover mb-3" style="width: 450px;">
+        <div hidden class="d-flex position-absolute center justify-content-start" style="width: 420px;height: 100px;">
+            <input type="file" class="d-flex profile-picture" style="align-items: right;" src="{% static 'newco/wallpaper.jpg' %}" alt="{{ loggeduser.username }} pfp">
+        </div> 
+        {% csrf_token %}
+        {% if request.user.username in request.path %}
+            <legend class="heading mt-5 mb-2">Your Profile</legend>
+        {% else %}
+            <legend class="heading mt-5 mb-2">{{ loggeduser.username }}'s Profile</legend>
+        {% endif %}
+        <div class="center w-100 flex-column">
+            <div class="w-75 mb-4">
+                <label class="label" for="username">Username</label>
+                <input class="w-100" id="username" name="username"  value="{{ loggeduser.username }}" disabled type="text">
+            </div>
+            
+            <div class="w-75 mb-4">
+                <label class="label" for="email">Email</label>
+                <input class="w-100 en" id="email" name="email"  value="{{ loggeduser.email }}" disabled type="text">
+            </div>
+            
+            <div class="w-75 mb-4">
+                <label class="label" for="gender">Gender</label>
+                <input class="w-100" id="gender" name="gender" disabled type="text" value="{{ loggeduser.gender }}">
+            </div>
+            
+            <div class="w-75 mb-4">
+                <label class="label" for="age">Age</label>
+                <input class="w-100 en" id="age" name="age" disabled type="text"  value="{{ loggeduser.age }}">
+            </div>
+            {% if request.user.username == loggeduser.username %}
+            <div class="w-75 mb-4">
+                <label class="label" for="ssn">Aadhar Number</label>
+                <input class="w-100" id="ssn" name="ssn" disabled type="text"  value="">
+                <div class="note"><div class="d-inline-flex" style="color: red;">
+                    Aadhar not verified.</div><a class="m-1 a-hover" style="color: black;" href="">Verify now?</a></div>       
+            </div>
+            {% endif %}
+            {% if request.user.username == loggeduser.username or is_applied %}
+                <div class="w-75 mb-4">
+                    <label class="label" for="phno">Contact</label>
+                    <input class="w-100 en" pattern="\d{0,10}" id="phno" name="phno" disabled type="text" value="{{ loggeduser.phno }}">
+                </div>
+            {% endif %}
+        </div>
+        {% if request.user.username == loggeduser.username %}
+        <div class="center" style="gap: 10px;">
+            <div class="center" id="edit-div">
+                <button type="button" class="mb-4 edit-btn" onclick="enableInputs(`{% url 'applied' %}`,true)">Update</button>
+            </div>
+            <div class="center">
+                <button type="button" class="mb-4 del-btn" id="del-acc-btn"><a href="#popup1" style="color: inherit;">Delete Account</a></button>
+            </div>
+            <div class="center" id="save-div" hidden>
+                <button type="submit" class="mb-4 save-btn" >Save</button>
+            </div>
+            <div class="center">
+                <button type="button" class="mb-4 del-btn" id="cncl-btn" hidden onclick="enableInputs(`{% url 'applied' %}`,false)">Cancel</button>
+            </div>
+        </div>
+        {% endif %}
+        <div id="popup1" class="overlay">
+            <div class="popup">
+                <a href="#" class="close">&times;</a>
+                <div class="content">
+                    Don't do it
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
