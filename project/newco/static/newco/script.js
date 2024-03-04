@@ -187,10 +187,10 @@ function handleFileInputChange(event) {
            // Optional: You can enable the save button or perform other actions
         // const saveButton = document.getElementById('save-div');
         // saveButton.hidden = false;
-        // const pfpanchor = document.getElementById('pfp-a')
-        // pfpanchor.click()
+        const pfpanchor = document.getElementById('pfp-a')
+        pfpanchor.click()
     }
 }
 function profilepicUpdated(){
-    // document.getElementById('submit-img').click();
+    document.getElementById('submit-img').click();
 }

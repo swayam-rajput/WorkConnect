@@ -36,10 +36,10 @@
                         <div class="w-25 center" style="height: 90px;">
                             {% if request.user not in job.applied.all %}
                                 <a href="post/apply/{{ job.id }}">
-                                    <button type="button" class="">Apply</button>
+                                    <button type="button">Apply</button>
                                 </a>
                             {% else %}                                    
-                                <button type="button" disabled style="cursor: not-allowed">Applied</button>                                    
+                                <button type="button" disabled style="opacity: 0.4;cursor: not-allowed">Applied</button>                                    
                             {% endif %}
                             </div>
                     {% else %}                    

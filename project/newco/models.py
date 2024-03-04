@@ -6,6 +6,7 @@ class UserProfile(models.Model):
     phno = models.IntegerField()
     gender = models.CharField(max_length=8)
     is_verified = models.BooleanField(default=False)
+    # aadhar = models.IntegerField()
     profilepic = models.ImageField(default='default.jpg',unique=False,upload_to='profile_pics/')
 
     def __str__(self):

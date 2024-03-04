@@ -7,7 +7,8 @@ from django.forms.models import model_to_dict
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
-
+import os
+from django.conf import settings
 from .models import UserProfile,Job
 
 # Create your views here.
@@ -194,8 +195,9 @@ def profile(request:HttpRequest,uname):
     try:
         user = User.objects.get(username=uname)
         u1 = UserProfile.objects.get(user=user)
-        print(u1.profilepic.url)
+        
         if request.method == 'POST':
+        
             if user.email != request.POST.get('email'):
                 user.email = request.POST.get('email')
                 user.save()
@@ -208,7 +210,6 @@ def profile(request:HttpRequest,uname):
         u1_dict = model_to_dict(u1)
         user_dict.update(u1_dict)
         user_profile = get_object_or_404(UserProfile, user=user)
-        print(u1.profilepic.url)
         return render(request, 'newco/profile.html', {'loggeduser': user_dict,'is_applied':user_in_applied_job})
     except User.DoesNotExist:
         return HttpResponse(f'Error: User {uname} does not exist')
@@ -225,8 +226,20 @@ def allapplicants(request):
     return render(request,'newco/allapplicants.html',{'jobs':jobs})
 
 def pfp_update(request:HttpRequest):
-    # add code to save the photo in the database
     if request.method == 'POST':
-        print(request.POST.keys())
-        print('post')
-    return redirect('profile',uname=request.user)
+        pfp = request.FILES.get('pfp')
+        u = UserProfile.objects.get(user=request.user)
+        old_profile_pic = u.profilepic
+        if old_profile_pic:
+            try:
+                os.remove(os.path.join(settings.MEDIA_ROOT, old_profile_pic.path))
+            except Exception as e:
+                pass
+        pfp.name = request.user.username+'_pfp.jpg'
+        with open(os.path.join(settings.MEDIA_ROOT, 'profile_pics', pfp.name), 'wb+') as destination:
+            for chunk in pfp.chunks():
+                destination.write(chunk)
+        
+        u.profilepic = f'profile_pics/{pfp.name}'
+        u.save()
+        return redirect('profile',uname=request.user)
