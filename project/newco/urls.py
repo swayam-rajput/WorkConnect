@@ -13,12 +13,11 @@ urlpatterns = [
     path('home',views.homepage,name='home'),
     path('',views.homepage,name='home'),
     path('addjob',views.addjob,name='add-job'),
-    path('profile/<str:uname>',views.profile,name='profile'),
+    path('user/<str:uname>',views.profile,name='profile'),
+    path('user/<str:username>/update_aadhar',views.update_aadhar,name='update_aadhar'),
     path('posts',views.posts,name='posted'),
     path('listings',views.listings,name='listings'),
-    
-    path('listings/<str:filterby>',views.listings,name='listings'),
-    
+    path('listings/<str:filterby>',views.listings,name='listings'),    
     path('delete/<int:job_id>',views.delete_job,name='delete'),
     path('post/apply/<int:job_id>',views.apply,name='apply'),
     path('post/<int:job_id>',views.job_profile,name='job-profile'),
@@ -27,5 +26,8 @@ urlpatterns = [
     path('post/applied/',views.apply,name='applied'),
     path('post/<int:job_id>/applicants',views.jobapplicants,name='applicant'),
     path('post/applicants',views.allapplicants,name='all-applicants'),
-    path('pfpupload',views.pfp_update,name='pfp-upload')
+    path('pfpupload',views.pfp_update,name='pfp-upload'),
+
+    path('verifyusers',views.verify,name='verify'),
+    path('verify/user/<int:id>',views.verify_user,name='verify_user')
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

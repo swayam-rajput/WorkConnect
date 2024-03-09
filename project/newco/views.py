@@ -236,6 +236,7 @@ def pfp_update(request:HttpRequest):
             except Exception as e:
                 pass
         pfp.name = request.user.username+'_pfp.jpg'
+        print(pfp.size)
         with open(os.path.join(settings.MEDIA_ROOT, 'profile_pics', pfp.name), 'wb+') as destination:
             for chunk in pfp.chunks():
                 destination.write(chunk)
@@ -243,3 +244,40 @@ def pfp_update(request:HttpRequest):
         u.profilepic = f'profile_pics/{pfp.name}'
         u.save()
         return redirect('profile',uname=request.user)
+    
+def update_aadhar(request:HttpRequest,username):
+    if request.method == 'POST':
+        aadhar_pdf = request.FILES.get('aadharPhoto')
+        pdf_psd = request.POST.get('pdf_psd')
+        aadhar_number = request.POST.get('aadharNumber')
+        
+        u = UserProfile.objects.get(user=request.user)
+        old_aadhar_pdf = u.aadharpdf
+        if old_aadhar_pdf:
+            try:
+                os.remove(os.path.join(settings.MEDIA_ROOT, old_aadhar_pdf.path))
+            except Exception as e:
+                pass
+        
+        aadhar_pdf.name = f'{request.user.username}_aadhar.pdf'
+        with open(os.path.join(settings.MEDIA_ROOT, 'ssn', aadhar_pdf.name), 'wb+') as destination:
+            for chunk in aadhar_pdf.chunks():
+                destination.write(chunk)
+        
+        u.aadharpdf = f'ssn/{aadhar_pdf.name}'
+        u.aadhar = aadhar_number
+        u.pdfpsd = pdf_psd
+        u.save()
+        return redirect('profile', uname=request.user)
+    return render(request,'newco/update-aadhar.html',{'username':request.user.username})
+
+def verify(request):
+    unverified = UserProfile.objects.filter(is_verified=False).exclude(aadhar='',aadharpdf=None,pdfpsd='')
+    return render(request,'newco/admin-verif.html',{'users':unverified})
+
+def verify_user(request,id):
+    user_profile = UserProfile.objects.get(user_id=id)
+    user_profile.is_verified = True
+    user_profile.save()
+    return redirect('verify')
+    

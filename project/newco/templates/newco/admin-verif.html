@@ -1,0 +1,49 @@
+{% extends 'newco/layout.html' %}
+{% if request.user.username != 'admin' %}
+{% block title %}Verify Users{% endblock %}
+{% block nav-header %}
+<header>
+    <div class="site-name" style="color: white;"><a href="{% url 'home' %}" style="color: white;">WorkConnect</a></div>
+    <div class="navbar" style="margin-right: 20%;">
+    <a class="navbar-item" href="{% url 'verify' %}" >Verify Users</a>
+    </div>
+    <a href="{% url 'logout' %}" id="nav-logout-btn" class="navbar-item">
+        Log Out</a>
+</header>
+{% endblock %}
+
+{% block body %}
+<div class="w-100 h-auto center"> 
+    <div class="w-75 d-block m-3">
+        <table class="table table-bordered  text-center mt-5">
+            <thead class="thead-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Username</th>
+                    <th>Aadhar No</th>
+                    <th>Aadhar PDF</th>
+                    <th>PDF Password</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody class="text-center">
+                {% for u in users %}
+                    <tr class="text-center">
+                        <td>{{ forloop.counter }}</td>
+                        <td><a href="{% url 'profile' u %}" class="a-hover">u/{{ u.user.username }}</a></td>
+                        <td>{{ u.aadhar }}</td>
+                        <td><a href="/newco{{ u.aadharpdf.url }}" target="_blank">{{ u.aadharpdf }}</a></td>
+                        <td>{{ u.pdfpsd }}</td>
+                        <td class="flex-row" style="width: 300px;gap:10px;">
+                            <button class="logout-btn"><a href="{% url 'verify_user' u.user_id %}">Verify</a></button>
+                            <button class="logout-btn">Unverify</button>
+                            
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+{% endif %}
