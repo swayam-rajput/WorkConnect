@@ -155,9 +155,21 @@ header{
     background-color: #4a7279;
 }
 .site-name{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Tahoma', Verdana, sans-serif;
     font-weight: 700;
-    background:transparent;
+    transition: all 0.4s;
+    background: linear-gradient(to bottom, #C7D1CA,
+    #BCE7FD);   
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.site-name:hover{
+    background: linear-gradient(to top, #85BAA1,
+    #BCE7FD);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    scale: 1.02;
 }
 .navbar{
     background: transparent;
@@ -171,7 +183,7 @@ header{
     background: transparent;
     color: rgba(255, 255, 255, 0.978);
     border-bottom: 2px #ffffff00 solid;
-    transition: all 0.1s ease-in-out;
+    transition: all 0.5s;
 }
 .navbar-item-focus{
     border-bottom: 2px #ffffff solid;
@@ -334,6 +346,7 @@ button.apply-btn{
     left: 50%;
     transform: translateX(-50%);
     width: 25%;
+    transition: all 1s;
     opacity: 0.8;
     color: black;
     z-index: 1;
@@ -343,7 +356,7 @@ button.apply-btn{
     justify-content: end;
     align-items: center;
     margin-bottom: 20px;
-    opacity: 0.9;
+    opacity: 0;
 } 
 .tooltiptext {
     width: fit-content;
@@ -477,5 +490,3 @@ svg#icon{
     font-size: 12px;
     color: #848d97;
 }
-
-  

@@ -157,16 +157,18 @@ function openFileInput() {
     }
 }
 
-if (!window.location.pathname.endsWith('/update_aadhar')){
-    document.getElementById('pfpimg').addEventListener('mouseleave', function() {
-        document.querySelector('#icon').style.opacity = 0;
-    });
-    document.getElementById('pfpimg').addEventListener('mouseenter', function() {
-        document.querySelector('#icon').style.opacity = 0.8;
-    });
-    
-    console.log(!window.location.pathname.endsWith('/update_aadhar'))
-}
+document.addEventListener('DOMContentLoaded', () => {
+    if (!window.location.pathname.endsWith('/update_aadhar')) {
+        if (document.getElementById('pfpimg')) {
+            document.getElementById('pfpimg').addEventListener('mouseleave', function() {
+                document.querySelector('#icon').style.opacity = 0;
+            });
+            document.getElementById('pfpimg').addEventListener('mouseenter', function() {
+                document.querySelector('#icon').style.opacity = 0.8;
+            });
+        }
+    }
+});
 
 function handleFileInputChange(event) {
     const fileInput = event.target;
@@ -218,3 +220,16 @@ function validateAadhar(e) {
     
     console.log('not working')
 }
+
+document.addEventListener('DOMContentLoaded',()=>{
+    const alertdiv=document.getElementById('alert-div');
+    setTimeout(() => {
+        alertdiv.style.opacity=0.9;
+    }, 100);
+    if (alertdiv){
+        setTimeout(() => {
+            alertdiv.style.opacity = 0;
+            alertdiv.style.display = none;
+        }, 2500);
+    }
+})

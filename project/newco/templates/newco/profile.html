@@ -58,9 +58,11 @@
                     {% if loggeduser.aadhar == "" %}
                     <div class="note"><div class="d-inline-flex text-muted" >
                         Aadhar is not verified.</div><a class="m-1 a-hover" href="{% url 'update_aadhar' request.user.username %}">Verify now?</a></div>    
-                    {% else %}
+                    {% elif not loggeduser.is_verified and loggeduser.aadhar != '-' %}
                         <div class="note"><div class="d-inline-flex text-muted">
                         Aadhar is being verified</div></div>    
+                    {% elif not loggeduser.is_verified and loggeduser.aadhar == '-' %}
+                        <div class="note"><div class="d-inline-flex text-muted">Verification has been declined.</div><a class="m-1 a-hover" href="{% url 'update_aadhar' request.user.username %}">Verify again?</a></div>    
                     {% endif %}
                 </div>
                 {% endif %}
@@ -80,9 +82,9 @@
                 <div class="center" id="edit-div">
                     <button type="button" class="mb-4 edit-btn" onclick="enableInputs(`{% url 'applied' %}`,true)">Update</button>
                 </div>
-                <div class="center">
+                <!-- <div class="center">
                     <button type="button" class="mb-4 del-btn" id="del-acc-btn"><a href="#popup1" style="color: inherit;">Delete Account</a></button>
-                </div>
+                </div> -->
                 <div class="center" id="save-div" hidden>
                     <button type="submit" class="mb-4 save-btn" >Save</button>
                 </div>

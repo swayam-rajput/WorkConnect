@@ -29,5 +29,6 @@ urlpatterns = [
     path('pfpupload',views.pfp_update,name='pfp-upload'),
 
     path('verifyusers',views.verify,name='verify'),
-    path('verify/user/<int:id>',views.verify_user,name='verify_user')
+    path('verify/user/<int:id>',views.verify_user,name='verify_user'),
+    path('decline/user/<int:id>',views.unverify_user,name='unverify_user')
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

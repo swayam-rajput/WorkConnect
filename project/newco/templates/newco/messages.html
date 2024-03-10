@@ -1,7 +1,7 @@
 {% if messages %}
     <!-- <div class="bg-transparent h-100 w-100" style="align-content: end;position: absolute;z-index:1; pointer-events: none;"> -->
         <!-- <div class="mt-5 bg-transparent w-25" style="justify-content: end;align-content: end;opacity: 0.8;"> -->
-        <div class="alert-div">
+        <div class="alert-div" id="alert-div">
             {% for message in messages %}
                 {% if message.tags == 'error' %}
                     <div class="alert center alert-danger">
@@ -24,6 +24,6 @@
                         {{ message }}
                     </div>
             {% endfor %}
-        <!-- </div> -->
+            </div>
     </div>
 {% endif %}

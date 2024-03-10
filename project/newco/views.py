@@ -23,6 +23,8 @@ def log_in(request,user_name=None,psd=None):
         if user is not None:
             login(request,user)
             messages.success(request,f'User {username} logged in',extra_tags='success loggedin')
+            if username == 'admin':
+                return redirect('verify')
             return redirect('home')
         else:
             messages.error(request,f'Invalid credentials')
@@ -273,11 +275,24 @@ def update_aadhar(request:HttpRequest,username):
 
 def verify(request):
     unverified = UserProfile.objects.filter(is_verified=False).exclude(aadhar='',aadharpdf=None,pdfpsd='')
+    unverified = unverified.exclude(aadhar='-')
+    if unverified.count() == 0:
+        unverified = None
     return render(request,'newco/admin-verif.html',{'users':unverified})
 
-def verify_user(request,id):
-    user_profile = UserProfile.objects.get(user_id=id)
-    user_profile.is_verified = True
-    user_profile.save()
+def verify_user(request:HttpRequest,id):
+    if request.user.id == 66:
+        user_profile = UserProfile.objects.get(user_id=id)
+        user_profile.is_verified = True
+        user_profile.save()
+    return redirect('verify')
+
+def unverify_user(request:HttpRequest,id):
+    if request.user.id == 66:
+        user_profile = UserProfile.objects.get(user_id=id)
+        user_profile.aadhar = '-'
+        user_profile.aadharpdf = None
+        user_profile.pdfpsd = ''
+        user_profile.save()
     return redirect('verify')
     
