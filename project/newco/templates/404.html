@@ -1,0 +1,11 @@
+{% extends 'newco/layout.html' %}
+{% load static %}
+{% block title %}Error - 404{% endblock %}
+{% block nav-header %}
+{% endblock %}
+{% block body %}
+<div class="d-flex justify-content-center align-items-center flex-column" style="font-size: 60px;height: 100%;">
+    <div style="color: #c85f5f;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">404</div>
+    <div class="d-block" style="font-family: system-ui;font-size: 25px;">There's nothing here. <a href="{% url 'home' %}" style="text-decoration: none;border-bottom: 2px solid #0d6efd;">Go Back</a></div>
+</div>
+{% endblock %}

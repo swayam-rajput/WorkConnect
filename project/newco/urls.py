@@ -1,10 +1,11 @@
 from django.urls import path
+from django.conf.urls import handler404
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
 
-handler404 = 'newco.views.custom_404'
+handler404 = views.custom_404
 
 urlpatterns = [
     path('login',views.log_in,name='login'),

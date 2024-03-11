@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, render, redirect
-from django.http import HttpResponse, HttpRequest
+from django.http import Http404, HttpResponse, HttpRequest, HttpResponseNotFound
 from django.db import IntegrityError
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
@@ -7,15 +7,16 @@ from django.forms.models import model_to_dict
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
-import os
 from django.conf import settings
 from .models import UserProfile,Job
+import os
 
 # Create your views here.
 def custom_404(request,exception):
-    return render(request, 'newco/404.html')
+    
+    return HttpResponseNotFound(request, '404.html',status=404)
 
-def log_in(request,user_name=None,psd=None):
+def log_in(request):
     if request.method == 'POST':   
         username = request.POST['username']
         password = request.POST['password']
@@ -274,11 +275,14 @@ def update_aadhar(request:HttpRequest,username):
     return render(request,'newco/update-aadhar.html',{'username':request.user.username})
 
 def verify(request):
-    unverified = UserProfile.objects.filter(is_verified=False).exclude(aadhar='',aadharpdf=None,pdfpsd='')
-    unverified = unverified.exclude(aadhar='-')
-    if unverified.count() == 0:
-        unverified = None
-    return render(request,'newco/admin-verif.html',{'users':unverified})
+    if request.user.username == 'admin':
+        unverified = UserProfile.objects.filter(is_verified=False).exclude(aadhar='',aadharpdf=None,pdfpsd='')
+        unverified = unverified.exclude(aadhar='-')
+        if unverified.count() == 0:
+            unverified = None
+        return render(request,'newco/admin-verif.html',{'users':unverified})
+    else:
+        raise Http404(request)
 
 def verify_user(request:HttpRequest,id):
     if request.user.id == 66:

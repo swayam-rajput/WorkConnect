@@ -16,41 +16,41 @@
     {% block body %}
     {% include 'newco/messages.html' %}
     {% if users %}
-    <div class="w-100 h-auto center"> 
-        <div class="w-75 d-block m-3">
-            <table class="table table-bordered  text-center mt-5">
-                <thead class="thead-dark">
-                    <tr>
-                        <th>#</th>
-                        <th>Username</th>
-                        <th>Aadhar No</th>
-                        <th>Aadhar PDF</th>
-                        <th>PDF Password</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody class="text-center">
-                    {% for u in users %}
-                        <tr class="text-center">
-                            <td>{{ forloop.counter }}</td>
-                            <td><a href="{% url 'profile' u %}" class="a-hover">u/{{ u.user.username }}</a></td>
-                            <td>{{ u.aadhar }}</td>
-                            <td>{% if u.aadharpdf %}
-                                <a href="/newco{{ u.aadharpdf.url }}" target="_blank">{{ u.aadharpdf }}</a>
-                                {% endif %}
-                            </td>
-                            <td>{{ u.pdfpsd }}</td>
-                            <td class="flex-row" style="width: 300px;gap:10px;">
-                                <a href="{% url 'verify_user' u.user_id %}" style="color: inherit;"><button class="save-btn">Verify</button></a>
-                                <a href="{% url 'unverify_user' u.user_id %}" style="color: inherit;"><button class="del-btn">Decline</button></a>
-                                
-                            </td>
+        <div class="w-100 h-auto center"> 
+            <div class="w-75 d-block m-3">
+                <table class="table table-bordered  text-center mt-5">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Username</th>
+                            <th>Aadhar No</th>
+                            <th>Aadhar PDF</th>
+                            <th>PDF Password</th>
+                            <th>Action</th>
                         </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody class="text-center">
+                        {% for u in users %}
+                            <tr class="text-center">
+                                <td>{{ forloop.counter }}</td>
+                                <td><a href="{% url 'profile' u %}" class="a-hover">u/{{ u.user.username }}</a></td>
+                                <td>{{ u.aadhar }}</td>
+                                <td>{% if u.aadharpdf %}
+                                    <a href="/newco{{ u.aadharpdf.url }}" target="_blank">{{ u.aadharpdf }}</a>
+                                    {% endif %}
+                                </td>
+                                <td>{{ u.pdfpsd }}</td>
+                                <td class="flex-row" style="width: 300px;gap:10px;">
+                                    <a href="{% url 'verify_user' u.user_id %}" style="color: inherit;"><button class="save-btn">Verify</button></a>
+                                    <a href="{% url 'unverify_user' u.user_id %}" style="color: inherit;"><button class="del-btn">Decline</button></a>
+                                    
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
     {% else %}
         <div class="w-100 h-75 center">
             <div class="display-6 h4">No users have applied for verification</div>
