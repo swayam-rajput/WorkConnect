@@ -13,7 +13,6 @@ import os
 
 # Create your views here.
 def custom_404(request,exception):
-    
     return HttpResponseNotFound(request, '404.html',status=404)
 
 def log_in(request):
@@ -187,8 +186,7 @@ def job_profile(request,job_id):
         job.location=location
         job.save()
         messages.success(request,f'Edited post')
-    print(applied)
-    return render(request,'newco/jobprofile.html',{
+        return render(request,'newco/jobprofile.html',{
         'job':job,
         'applied':applied
     })
@@ -239,7 +237,6 @@ def pfp_update(request:HttpRequest):
             except Exception as e:
                 pass
         pfp.name = request.user.username+'_pfp.jpg'
-        print(pfp.size)
         with open(os.path.join(settings.MEDIA_ROOT, 'profile_pics', pfp.name), 'wb+') as destination:
             for chunk in pfp.chunks():
                 destination.write(chunk)
@@ -250,7 +247,7 @@ def pfp_update(request:HttpRequest):
     
 def update_aadhar(request:HttpRequest,username):
     if request.method == 'POST':
-        aadhar_pdf = request.FILES.get('aadharPhoto')
+        aadhar_pdf = request.FILES.get('aadharpdf')
         pdf_psd = request.POST.get('pdf_psd')
         aadhar_number = request.POST.get('aadharNumber')
         

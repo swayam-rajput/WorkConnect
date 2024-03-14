@@ -16,28 +16,28 @@
         <p class="heading">Register</p>
         <div class="w-100 center bg-transparent" style="flex-direction: column;">
             <div class="mb-2 bg-transparent">
-                <input  id="username" name="username" oninput="emailvaluate()" placeholder="Username" type="text">
+                <input style="height: 45px;" id="username" name="username" autocomplete="off" oninput="emailvaluate()" placeholder="Username" type="text">
             </div>
             
             <div class="mb-2 bg-transparent">
-                <input  id="email" name="email" placeholder="Email" type="email">
+                <input style="height: 45px;" id="email" name="email" autocomplete="off" placeholder="Email" type="email">
             </div>
 
             <div class="mb-2 bg-transparent">
-                <input  id="phno" name="phno" pattern="\d{0,10}" placeholder="Phone Number" type="text">
+                <input style="height: 45px;" id="phno" name="phno" autocomplete="off" pattern="\d{0,10}" placeholder="Phone Number" type="text">
             </div>
             
             <div class="mb-2 bg-transparent">
-                <input id="age" name="age" placeholder="Age"  type="number">
+                <input style="height: 45px;"id="age" name="age" autocomplete="off" placeholder="Age"  type="number">
             </div>
             <div class="mb-2 bg-transparent">
                 <div class="radio-inputs">
                     <label class="radio">
-                      <input type="radio" name="radio" value="Male" checked="">
+                      <input style="height: 45px;"type="radio" name="radio" value="Male" checked="">
                       <span class="name">Male</span>
                     </label>
                     <label class="radio">
-                      <input type="radio" value="Female" name="radio">
+                      <input style="height: 45px;"type="radio" value="Female" name="radio">
                       <span class="name">Female</span>
                     </label>
                     
@@ -45,16 +45,16 @@
             </div>
             
             <div class="mb-2 bg-transparent">
-                <input  id="password" name="password" placeholder="Password" type="password">
+                <input style="height: 45px;" id="password" name="password" placeholder="Password" type="password">
             </div>
             <div class="mb-2 bg-transparent">
-                <input  id="cpassword" name="cpassword" placeholder="Confirm Password" type="password">
+                <input style="height: 45px;" id="cpassword" name="cpassword" placeholder="Confirm Password" type="password">
             </div>
             
         </div> 
         
         
-        <div class="center h-50 bg-transparent" style="gap: 20px;">
+        <div class="center h-50 mt-2 bg-transparent" style="gap: 20px;">
             <a href="{% url 'home' %}"><button type="button" style="border-radius: 10px; color: black;">Back</button></a>
             <button class="log-reg-btn">Sign Up</button>
         </div>

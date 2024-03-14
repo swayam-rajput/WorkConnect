@@ -4,13 +4,15 @@
 {% include 'newco/messages.html' %}
 {% if request.user.username in request.path %}
 <div class="w-100 h-75 mt-5 center bg-transparent flex-column"> 
-    <div class="p-2 form h-75 nothover center" >
+    <div class="p-4 form h-auto nothover center" >
         <form action="" method="post" id="ssnform" enctype="multipart/form-data" onsubmit="validateAadhar(event)">
             {% csrf_token %}
 
-            <div class="w-75 mb-4">
-                <label class="label" for="aadharPhoto">Aadhar PDF from <a target="_blank" href="https://uidai.gov.in/">UIDAI</a>:</label>
-                <input type="file" class="notinput w-100" id="aadharPhoto"  name="aadharPhoto" >
+            <div class="w-100 h-auto mt-2 mb-4">
+                <label class="label" for="aadharpdf">Aadhar PDF from <a target="_blank" href="https://uidai.gov.in/">UIDAI</a>:</label>
+                <input type="file" class="notinput w-100" id="aadharpdf"  name="aadharpdf" oninput="validateAadharPDF()">
+                <div id="pdfError" class="note w-100" style="display: none; color: red;">PDF must be with the name format 'EAadhar_123.pdf'</div>
+
             </div>
 
             <div class="w-75 mb-4">

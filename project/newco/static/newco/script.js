@@ -201,26 +201,34 @@ function handleFileInputChange(event) {
 function validateAadhar(e) {
     
     var text = document.getElementById('aadharNumber').value;
-    var file = document.getElementById('aadharPhoto').value; // This will get the file name, not its length
+    var file =document.getElementById('aadharpdf').value; // This will get the file name, not its length
     var pdfpsd = document.getElementById('pdf_psd').value; // This will get the file name, not its length
     
     console.log(document.getElementById('aadharNumber').value);
-    console.log(document.getElementById('aadharPhoto').value); // This will get the file name, not its length
+    console.log(document.getElementById('aadharpdf').value); // This will get the file name, not its length
     console.log(document.getElementById('pdf_psd').value); // This will get the file name, not its length
 
-    
     if (text.length === 12 && file && pdfpsd.length === 8) { // Checking if Aadhar number is 12 digits and file is selected
         document.getElementById('subbtn').click();
         console.log('submitted')
         return    
     } else {
         e.preventDefault()
-        alert("Please enter a valid 12-digit Aadhar number and select a PDF file.\nDownload pdf file from UIDAI and upload it with its password");
+        alert("Please enter a valid 12-digit Aadhar number and select a PDF file.\nDownload pdf file from UIDAI and upload it with its password\nPassword must be like eg. ABCD2001");
     }
     
-    console.log('not working')
 }
 
+function validateAadharPDF(){
+    const regex = /EAadhar_\d+\.pdf/;
+    const file =document.getElementById('aadharpdf').value;
+    console.log(file)
+    if(!regex.test(file)){
+        document.getElementById('pdfError').style.display = 'flex';
+    }else{
+        document.getElementById('pdfError').style.display = 'none';
+    }
+}
 document.addEventListener('DOMContentLoaded',()=>{
     const alertdiv=document.getElementById('alert-div');
     setTimeout(() => {
