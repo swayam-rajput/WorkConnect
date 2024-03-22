@@ -45,7 +45,7 @@
                             </div>
                     {% else %}                    
                         <div class="d-inline-flex flex-row-reverse" style="height: 25px; transition: all 0.3s;">
-                            <a href="profile/{{ job.user.username }}" class="a-hover">you</a>
+                            <a href="{% url 'profile' job.user.username %}" class="a-hover">you</a>
                         </div>
                     {% endif %}
                 </div>
