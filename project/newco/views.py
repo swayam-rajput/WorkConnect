@@ -190,6 +190,7 @@ def job_profile(request,job_id):
         'job':job,
         'applied':applied
     })
+    return render(request,'newco/jobprofile.html',{'job':job})
 
 
 def profile(request:HttpRequest,uname):
