@@ -186,12 +186,11 @@ def job_profile(request,job_id):
         job.location=location
         job.save()
         messages.success(request,f'Edited post')
-        return render(request,'newco/jobprofile.html',{
+    return render(request,'newco/jobprofile.html',{
         'job':job,
         'applied':applied
     })
-    return render(request,'newco/jobprofile.html',{'job':job})
-
+    
 
 def profile(request:HttpRequest,uname):
     try:
