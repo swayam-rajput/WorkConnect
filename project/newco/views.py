@@ -277,6 +277,7 @@ def verify(request):
         unverified = unverified.exclude(aadhar='-')
         if unverified.count() == 0:
             unverified = None
+        print(unverified)
         return render(request,'newco/admin-verif.html',{'users':unverified})
     else:
         raise Http404(request)

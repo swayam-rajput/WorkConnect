@@ -231,13 +231,15 @@ function validateAadharPDF(){
 }
 document.addEventListener('DOMContentLoaded',()=>{
     const alertdiv=document.getElementById('alert-div');
-    setTimeout(() => {
-        alertdiv.style.opacity=0.9;
-    }, 100);
-    if (alertdiv){
+    if(alertdiv){
         setTimeout(() => {
-            alertdiv.style.opacity = 0;
-            alertdiv.style.display = none;
-        }, 2500);
+            alertdiv.style.opacity=0.9;
+        }, 100);
+        if (alertdiv){
+            setTimeout(() => {
+                alertdiv.style.opacity = 0;
+                alertdiv.style.display = none;
+            }, 2000);
+        }
     }
 })
