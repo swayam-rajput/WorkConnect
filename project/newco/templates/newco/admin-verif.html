@@ -35,10 +35,8 @@
                                 <td>{{ forloop.counter }}</td>
                                 <td><a href="{% url 'profile' u %}" class="a-hover">u/{{ u.user.username }}</a></td>
                                 <td>{{ u.aadhar }}</td>
-                                <td>{% if u.aadharpdf %}
-                                    <a href="/newco{{ u.aadharpdf.url }}" target="_blank">{{ u.aadharpdf }}</a>
-                                    {% endif %}
-                                </td>
+                                <td>{% if u.aadharpdf %}<a href="/newco{{ u.aadharpdf.url }}" target="_blank">{{ u.aadharpdf }}</a>
+                                    {% endif %}</td>
                                 <td>{{ u.pdfpsd }}</td>
                                 <td class="flex-row" style="width: 300px;gap:10px;">
                                     <a href="{% url 'verify_user' u.user_id %}" style="color: inherit;"><button class="save-btn">Verify</button></a>

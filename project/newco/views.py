@@ -93,11 +93,12 @@ def listings(request: HttpRequest,filterby=None):
             jobs = jobs.filter(job_specification=title.upper())
         if location:
             jobs = jobs.filter(location=location)
+    searched = False
     if jobs.count() == 0:
         jobs = None
     else:
-        pass
-    return render(request, 'newco/listings.html', {'jobs': jobs,'searched':jobs.count()!=Job.objects.count()})
+        searched = jobs.count()!=Job.objects.count()
+    return render(request, 'newco/listings.html', {'jobs': jobs,'searched':searched})
 
 def addjob(request:HttpRequest):
     """Creates a new job based on the information provided via the form"""

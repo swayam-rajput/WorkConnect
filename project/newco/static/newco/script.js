@@ -1,8 +1,4 @@
-function emailvaluate(){
-    var text = document.getElementById('username').value
-    document.getElementById('email').value = `${text}@gmail.com`
-    console.log('called')
-}
+
 function validateRegistration() {
     resetErrors();
     // alert('func called')
@@ -129,14 +125,23 @@ document.addEventListener('DOMContentLoaded', function() {
         var currentUrl = window.location.href;
 
         navbarItems.forEach(function(item) {
-            var targetUrl = item.getAttribute('href');
 
+            var targetUrl = item.getAttribute('href');
+            console.log(targetUrl)
             if (currentUrl.includes(targetUrl)) {
+                console.log(currentUrl)
                 navbarItems.forEach(function(navItem) {
                     navItem.classList.remove(classname);
                 });
                 item.classList.add(classname);
             }
+        });
+    }
+    function removeActiveNavItem() {
+        navbarItems.forEach(function(item) {
+            navbarItems.forEach(function(navItem) {
+                navItem.classList.remove(classname);
+            });
         });
     }
     setActiveNavItem();
@@ -233,7 +238,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     const alertdiv=document.getElementById('alert-div');
     if(alertdiv){
         setTimeout(() => {
-            alertdiv.style.opacity=0.9;
+            alertdiv.style.opacity=1;
         }, 100);
         if (alertdiv){
             setTimeout(() => {

@@ -1,5 +1,5 @@
 *{
-    font-family: 'Segoe UI';
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     margin: 0;
     padding: 0;
     color: black;
@@ -11,9 +11,11 @@
 .center{
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center
+    ;
 }
 div{
+    
     background: transparent;
 }
 body{
@@ -192,7 +194,8 @@ header{
     opacity: 1;
 }
 .navbar:hover > .navbar-item:hover{
-    opacity: 0.6;
+    opacity: 0.8;
+    border-bottom: 2px #ffffffbe solid;
 }
 .navbar-item:hover, .navbar-item:active ,.navbar-item:focus{
     scale: 1.02;
@@ -276,19 +279,16 @@ header{
 .post:hover{
     border: 1px gray solid;
 }
-.style-one {
+.hr {
     border: 0;
     height: 1px;
     background: #333;
     background-image: linear-gradient(to right, #ccc, #333, #ccc);
 }
-hr:first-child,hr:last-child{
+hr.hr:first-child,hr:last-child,hr:first-child{
     visibility: hidden;
 }
-hr{
-    border: 0;
-    border-top: 0.5px solid black;
-}
+
 .del-btn{
     /* border: 1px solid #c41b1b; */
     color: #c41b1b;
@@ -502,7 +502,7 @@ svg#icon{
     width: fit-content;
     border-radius: 4px;
     z-index: 100;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family:  Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-weight: 600;
     position: relative;
     color: #555;
@@ -512,8 +512,9 @@ svg#icon{
     display: inline;    
     margin: 0;
     font-size: 13px;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.7px;
     padding: 4px 6px;
+    text-transform: uppercase;
     text-decoration: none;
     transition: all .1s ease-in-out;
 }
