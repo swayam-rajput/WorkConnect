@@ -1,0 +1,69 @@
+{% extends 'newco/layout.html' %}
+{% load static %}
+{% block css %}<link rel="stylesheet" href="{% static 'newco/log.reg.styles.css' %}">{% endblock %}
+
+
+{% block title %}Register{% endblock %}
+{% block nav-header %}
+{% endblock %}
+
+{% block body %}
+{% include 'newco/messages.html' %}    
+{# bootstrap css height of input needs to be adjusted as per the height of the form #}
+<div class="w-auto h-100 center"> 
+    <form action="" method="post" onsubmit="return validateRegistration()" class="form" style="height: 600px;">
+        {% csrf_token %}
+        <p class="heading">Register</p>
+        <div class="w-100 center bg-transparent" style="flex-direction: column;">
+            <div class="mb-2 bg-transparent">
+                <input style="height: 45px;" id="username" name="username" autocomplete="off" placeholder="Username" type="text">
+            </div>
+            
+            <div class="mb-2 bg-transparent">
+                <input style="height: 45px;" id="email" name="email" autocomplete="off" placeholder="Email" type="email">
+            </div>
+
+            <div class="mb-2 bg-transparent">
+                <input style="height: 45px;" id="phno" name="phno" autocomplete="off" pattern="\d{0,10}" placeholder="Phone Number" type="text">
+            </div>
+            
+            <div class="mb-2 bg-transparent">
+                <input style="height: 45px;"id="age" name="age" autocomplete="off" pattern="(1[89]|[2-5][0-9]|60)" placeholder="Age"  >
+            </div>
+            <div class="mb-2 bg-transparent">
+                <div class="radio-inputs">
+                    <label class="radio">
+                      <input style="height: 45px;"type="radio" name="radio" value="Male" checked="">
+                      <span class="name">Male</span>
+                    </label>
+                    <label class="radio">
+                      <input style="height: 45px;"type="radio" value="Female" name="radio">
+                      <span class="name">Female</span>
+                    </label>
+                    
+                  </div>
+            </div>
+            
+            <div class="mb-2 bg-transparent">
+                <input style="height: 45px;" id="password" name="password" placeholder="Password" type="password">
+            </div>
+            <div class="mb-2 bg-transparent">
+                <input style="height: 45px;" id="cpassword" name="cpassword" placeholder="Confirm Password" type="password">
+            </div>
+            
+        </div> 
+        
+        
+        <div class="center h-50 mt-2 bg-transparent" style="gap: 20px;">
+            <a href="{% url 'home' %}"><button type="button" style="border-radius: 10px; color: black;">Back</button></a>
+            <button class="log-reg-btn">Sign Up</button>
+        </div>
+        <div class="center signup-prompt">
+            <a class="links" href="{% url 'login' %}">Already have an account? Log In</a>
+        </div>
+    </form>
+    
+</div>
+</div>
+
+{% endblock %}

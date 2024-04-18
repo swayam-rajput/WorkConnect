@@ -1,0 +1,24 @@
+{% extends 'newco/layout.html' %}
+{% block title %}Home{% endblock %}
+{% block body %}    
+{% include 'newco/messages.html' %}    
+<div class="w-100 flex-column" style="height:89%;background-color: white;"> 
+    <form class="center h-100" method="post" action="{% url 'listings' %}" style="gap: 20px;">
+        {% csrf_token %}
+        <input list="jobs" autocomplete="off" type="text" name="jobtitle" placeholder="Job title">
+        <datalist id="jobs">
+            {% for i in jobs %}
+            <option value="{{ i.capitalize }}">{{ i.capitalize }}</option>
+            {% endfor %}
+        </datalist>
+        <input list="locate" type="text" autocomplete="off" name="location" placeholder="Location">
+        
+        <datalist id="locate">
+            {% for i in location %}
+            <option value="{{ i }}">{{ i }}</option>
+            {% endfor %}
+        </datalist>
+        <button type="submit">Search Job</button>
+    </form>
+</div>
+{% endblock %}

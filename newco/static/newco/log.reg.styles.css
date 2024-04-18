@@ -1,0 +1,101 @@
+.form {
+    width: 380px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    background-color: white;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    transition: .4s ease-in-out;
+}
+.noboxshadow{
+    box-shadow: none;
+}
+.form:not(.nothover):hover {
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+    scale: 0.99;
+}
+.heading {
+    font-size: 20px;
+    position: relative;
+    background: transparent;
+    text-align: center;
+    color: black;
+    top: -1em;
+    margin-top: 60px;
+    font-weight: bold;
+}
+.form div input{
+    width: 300px;
+    max-width: none;
+}
+.h-40px{
+    height: 40px;
+}
+.log-reg-btn{
+    background-color: #0f9775;
+    color: white;
+    border-radius: 10px;
+}
+.log-reg-btn:hover{
+    scale:1.05;
+    color: white;
+}
+.signup-prompt{
+    width: 100%;
+    font-size: 14px;
+    margin: 15px 0px;
+    color: black;
+    background: transparent;
+    height: 25px;
+}
+.links{
+    color: #506393c7;
+    font-weight: 500;
+    border-bottom: 2px #495a8600 solid;
+    transition: all .3s;
+}
+.links:hover{
+    color: #506393;
+    border-bottom: 2px #495a86 solid;    
+}
+
+.radio-inputs {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 0.5rem;
+    background-color: #EEE;
+    box-sizing: border-box;
+    box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.06);
+    padding: 0.25rem;
+    width: 300px;
+    font-size: 14px;
+}
+  
+.radio-inputs .radio {
+    flex: 1 1 auto;
+    text-align: center;
+}
+  
+.radio-inputs .radio input {
+    display: none;
+}
+  
+.radio-inputs .radio .name {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    border: none;
+    padding: .5rem 0;
+    color: rgba(51, 65, 85, 1);
+    transition: all .15s ease-in-out;
+}
+  
+.radio-inputs .radio input:checked + .name {
+    background-color: #fff;
+    font-weight: 600;
+}
+

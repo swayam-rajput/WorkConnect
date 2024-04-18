@@ -1,0 +1,62 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Home{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&family=Public+Sans&display=swap" rel="stylesheet">
+    {% block css %}
+    {% endblock %}
+    <link rel="stylesheet" href="{% static 'newco/log.reg.styles.css' %}">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{% static 'newco/styles.css' %}">
+    <style>
+        /* body{
+            background-image: url("{% static 'newco/w.jpg' %}");
+            backdrop-filter: blur(1px);
+            height: 100%;
+            background-size: cover;
+        } */
+    </style>
+</head>
+
+<body>
+    {% block nav-header %}
+    <header>
+        <div class="site-name" style="color: white;"><a href="{% url 'home' %}" style="color: white;">WorkConnect</a></div>
+        <div class="navbar">
+            
+            <a class="navbar-item" href="{% url 'home' %}">Home</a>    
+            {% if user.is_authenticated %}
+                <a class="navbar-item" href="{% url 'posted' %}">Posted</a>
+                <a class="navbar-item" href="{% url 'applied' %}">Applied</a>
+            {% endif %}
+            <a class="navbar-item" href="{% url 'listings' %}">Jobs</a>
+        </div>
+        <div class="nav-buttons">
+            {% block nav-icons %}
+                {% if user.is_authenticated %}
+                    <a href="{% url 'add-job' %}"><button>Add Post</button></a>
+                    <a href="{% url 'profile' request.user.username %}"><button>Profile<div class="tooltiptext">{{ request.user.username }}</div></button></a>
+                    <a href="{% url 'logout' %}" id="nav-logout-btn" class="navbar-item">Log Out</a>
+                    
+                {% else %}
+                    <a href="{% url 'register' %}"><button>Register</button></a>
+                    <a href="{% url 'login' %}"><button>Log In</button></a>
+                {% endif %}
+            {% endblock %}
+
+        </div>
+    </header>
+    {% endblock %}
+    {% block body %}
+    
+    {% endblock %}
+    <script src="{% static 'newco/script.js' %}"></script>
+</body>
+</html>
