@@ -3,14 +3,14 @@
 {% block title %}{{ job.title }}{% endblock %}
 {% block body %}
 {% include 'newco/messages.html' %}
-<div class="w-100 h-auto mt-5 center bg-transparent flex-column"> 
+<div class="w-100 h-auto mt-4 center bg-transparent flex-column"> 
     <div class="h-auto p-1 form nothover" style="width: 600px;">
         <form action="" class="mb-3" method="post">
             {% csrf_token %}
-            <legend class="heading mt-5 mb-2">{{ job.title }}</legend>
+            <legend class="heading mt-5 mb-1">{{ job.title }}</legend>
             <div class="center w-100 mb-2 flex-column">
 
-                <div class="w-75 mb-4">
+                <div class="w-75 mb-3">
                     <label class="label" for="job_specification">JOB</label>
                     <input class="w-100 en" name="job_specification"  value="{{ job.job_specification.capitalize }}" disabled type="text">
                 </div>
@@ -22,7 +22,7 @@
                 
                 <div class="w-75 mb-4">
                     <label class="label" for="description">DESCRIPTION</label>
-                    <textarea class="w-100 h-75 textarea en" name="description" disabled type="text">{{ job.description }}</textarea>
+                    <textarea class="w-100 h-50 textarea en" name="description" disabled type="text">{{ job.description }}</textarea>
                 </div>
                 
                 <div class="w-75 mb-2">

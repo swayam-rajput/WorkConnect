@@ -274,11 +274,12 @@ def update_aadhar(request:HttpRequest,username):
 
 def verify(request):
     if request.user.username == 'admin':
-        unverified = UserProfile.objects.filter(is_verified=False).exclude(aadhar='',aadharpdf=None,pdfpsd='')
+        unverified = UserProfile.objects.filter(is_verified=False).exclude(aadhar='',pdfpsd='')
         unverified = unverified.exclude(aadhar='-')
+        unverified = unverified.exclude(aadharpdf="null")
+        
         if unverified.count() == 0:
             unverified = None
-        print(unverified)
         return render(request,'newco/admin-verif.html',{'users':unverified})
     else:
         raise Http404(request)

@@ -30,8 +30,8 @@
     <header>
         <div class="site-name" style="color: white;"><a href="{% url 'home' %}" style="color: white;">WorkConnect</a></div>
         <div class="navbar">
-            <a class="navbar-item" href="{% url 'home' %}">
-                Home</a>    
+            
+            <a class="navbar-item" href="{% url 'home' %}">Home</a>    
             {% if user.is_authenticated %}
                 <a class="navbar-item" href="{% url 'posted' %}">Posted</a>
                 <a class="navbar-item" href="{% url 'applied' %}">Applied</a>

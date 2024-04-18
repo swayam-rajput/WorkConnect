@@ -24,7 +24,7 @@
                 </a> 
                     {% if job.user.username != request.user.username %}
                         <div class="d-inline-flex flex-row" style="gap: 5px;height: 25px; transition: all 0.3s;">
-                            <a href="" class="a-hover">u/{{ job.user.username }}</a>
+                            <a href="{% url 'profile' job.user.username %}" class="a-hover">u/{{ job.user.username }}</a>
                             {% if job.user.userprofile.is_verified %}
                             <!-- 'userprofile' this shit took 2 hours to be figured -->
                                 <svg xmlns="http://www.w3.org/2000/svg" style="margin-top: 7%;" width="18" height="18" viewBox="0 0 600 600" >
@@ -44,7 +44,7 @@
                             {% endif %}
                             </div>
                     {% else %}                    
-                        <div class="d-inline-flex flex-row-reverse" style="height: 25px; transition: all 0.3s;">
+                        <div class="d-inline-flex flex-row" style="height: 25px; transition: all 0.3s;">
                             <a href="{% url 'profile' job.user.username %}" class="a-hover">you</a>
                         </div>
                     {% endif %}

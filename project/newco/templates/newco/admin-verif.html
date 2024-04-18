@@ -33,7 +33,7 @@
                         {% for u in users %}
                             <tr class="text-center">
                                 <td>{{ forloop.counter }}</td>
-                                <td><a href="{% url 'profile' u %}" class="a-hover">u/{{ u.user.username }}</a></td>
+                                <td><a href="{% url 'profile' u %}" target="_blank" class="a-hover">u/{{ u.user.username }}</a></td>
                                 <td>{{ u.aadhar }}</td>
                                 <td>{% if u.aadharpdf %}<a href="/newco{{ u.aadharpdf.url }}" target="_blank">{{ u.aadharpdf }}</a>
                                     {% endif %}</td>

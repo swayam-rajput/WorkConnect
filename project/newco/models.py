@@ -10,7 +10,7 @@ class UserProfile(models.Model):
     is_verified = models.BooleanField(default=False)
     aadhar = models.CharField(max_length=12,default="")
     profilepic = models.ImageField(default='default.jpg',unique=False,upload_to='profile_pics/')
-    aadharpdf = models.FileField(upload_to="ssn/",null=True,blank=True, validators=[FileExtensionValidator(allowed_extensions=['pdf'])])
+    aadharpdf = models.FileField(upload_to="ssn/",null=True,default="null", validators=[FileExtensionValidator(allowed_extensions=['pdf'])])
     pdfpsd = models.CharField(max_length=8,default="")
     
     def __str__(self):
