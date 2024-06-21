@@ -270,7 +270,7 @@ def update_aadhar(request:HttpRequest,username):
         u.pdfpsd = pdf_psd
         u.save()
         return redirect('profile', uname=request.user)
-    return render(request,'newco/update-aadhar.html',{'username':request.user.username})
+    return render(request,'newco/update-ssn.html',{'username':request.user.username})
 
 def verify(request):
     if request.user.username == 'admin':
