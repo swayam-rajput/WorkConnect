@@ -1,2 +1,2 @@
 # WorkConnect.site
-A Job Portal Website
+A Job Portal Website using Django
